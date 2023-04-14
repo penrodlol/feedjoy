@@ -7,6 +7,8 @@ import { User } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import type { z } from 'zod';
 
+type Props = { params: { page: string } };
+
 async function getPosts(page: z.infer<typeof paramsSchema>['page']) {
   const { data, error } = await supabase
     .from('post')
@@ -18,7 +20,9 @@ async function getPosts(page: z.infer<typeof paramsSchema>['page']) {
   return data.map((post) => ({ ...post, site: post.site as Site }));
 }
 
-export default async function Page(props: { params: { page: string } }) {
+export const revalidate = 86400;
+
+export default async function Page(props: Props) {
   const params = await paramsSchema.safeParse(props.params);
   if (!params.success) redirect('/');
 

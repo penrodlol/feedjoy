@@ -8,6 +8,8 @@ import { History, Library } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import type { z } from 'zod';
 
+type Props = { params: { page: string } };
+
 async function getSites(page: z.infer<typeof paramsSchema>['page']) {
   const { data, error } = await supabase
     .from('site')
@@ -21,7 +23,9 @@ async function getSites(page: z.infer<typeof paramsSchema>['page']) {
   return data.map((site) => ({ ...site, post: site.post as Post[] }));
 }
 
-export default async function Page(props: { params: { page: string } }) {
+export const revalidate = 86400;
+
+export default async function Page(props: Props) {
   const params = await paramsSchema.safeParse(props.params);
   if (!params.success) redirect('/sites/page/1');
 

@@ -21,6 +21,8 @@ async function getRecentPosts() {
   return data.map((post) => ({ ...post, site: post.site as Site }));
 }
 
+export const revalidate = 86400;
+
 export default async function Home() {
   const { totalposts, totalsites, postweek } = await getRoot();
   const recentPosts = await getRecentPosts();

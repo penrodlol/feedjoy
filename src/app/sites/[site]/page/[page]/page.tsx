@@ -26,6 +26,8 @@ async function getSitePosts({ site, page }: z.infer<typeof schema>) {
   return { site: _site, posts: post as Post[] };
 }
 
+export const revalidate = 86400;
+
 export default async function Page(props: Props) {
   const params = await schema.safeParse(props.params);
   if (!params.success) redirect('/');
