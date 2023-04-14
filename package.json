@@ -1,7 +1,9 @@
 {
-  "name": "feedjoy-next",
+  "name": "feedjoy",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "author": "penrodlol",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,17 +11,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.20.0",
+    "encoding": "^0.1.13",
+    "lucide-react": "^0.144.0",
+    "next": "13.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
+    "@types/user-agents": "^1.0.2",
     "autoprefixer": "10.4.14",
+    "cheerio": "^1.0.0-rc.12",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
-    "next": "13.3.0",
+    "gpt-3-encoder": "^1.1.4",
+    "openai": "^3.2.1",
     "postcss": "8.4.21",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.7",
+    "rss-parser": "^3.13.0",
     "tailwindcss": "3.3.1",
-    "typescript": "5.0.4"
+    "tailwindcss-fluid-type": "^2.0.3",
+    "typescript": "5.0.4",
+    "user-agents": "^1.0.1347"
   }
 }
