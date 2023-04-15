@@ -23,7 +23,7 @@ jobs:
         run: yarn install
 
       - name: Fetch Posts
-        run: npx ts-node --esm .github/scripts/posts.ts
+        run: npx ts-node .github/scripts/posts.mts
 
       - name: Fetch Summaries
-        run: npx ts-node --esm .github/scripts/summaries.ts
+        run: npx ts-node .github/scripts/summaries.mts
