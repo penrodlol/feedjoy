@@ -1,7 +1,7 @@
 import { Anchor, NextAnchor } from '@/ui/anchor';
-import { Kaisei_Tokumin, Taviraj } from '@next/font/google';
 import { Home } from 'lucide-react';
 import type { Metadata } from 'next';
+import { Kaisei_Tokumin, Taviraj } from 'next/font/google';
 import type { ReactNode } from 'react';
 import 'tailwindcss/tailwind.css';
 
@@ -23,19 +23,40 @@ export const metadata: Metadata = {
   title: 'feedjoy',
   description: 'a minimal rss feed congregator',
   icons: { shortcut: '/favicon.svg' },
+  creator: 'christian penrod',
+  publisher: 'christian penrod',
+  keywords: 'rss, nextjs, openai, tailwindcss',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  openGraph: {
+    title: 'feedjoy',
+    description: 'a minimal rss feed congregator',
+    url: `${process.env.SITE}`,
+    siteName: 'feedjoy',
+    locale: 'en_US',
+    type: 'website',
+    images: `${process.env.SITE}/og.png`,
+  },
+  twitter: {
+    title: 'feedjoy',
+    card: 'summary_large_image',
+    images: `${process.env.SITE}/og.png`,
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${taviraj.variable} ${kaisei.variable}`}>
       <body
-        className={`mx-auto flex min-h-screen max-w-screen-lg flex-col
-                  bg-1 px-fluid-4 text-1 text-base selection:bg-brand 
-                  selection:text-black`}
+        className={`mx-auto flex min-h-screen max-w-screen-lg flex-col bg-1 px-fluid-4 
+                  text-1 text-base selection:bg-brand selection:text-black`}
       >
         <header
-          className={`m-4 mx-auto flex w-full max-w-screen-sm items-center
-                      justify-between rounded bg-2 px-4 py-2 shadow`}
+          className={`m-4 mx-auto flex w-full max-w-screen-sm items-center justify-between
+                      rounded bg-2 px-4 py-2 shadow`}
         >
           <NextAnchor href="/" aria-label="Home">
             <Home className="h-5 w-5" aria-hidden />
