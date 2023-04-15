@@ -42,6 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'feedjoy',
+    description: 'a minimal rss feed congregator',
     card: 'summary_large_image',
     images: `${process.env.SITE}/og.png`,
   },
