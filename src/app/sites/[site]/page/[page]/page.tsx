@@ -1,4 +1,4 @@
-import { paramsSchema } from '@/const/params';
+import { paramsSchema } from '@/const/schemas';
 import supabase, { type Post } from '@/lib/supabase';
 import Breadcrumbs from '@/ui/breadcrumbs';
 import Card from '@/ui/card';
@@ -22,14 +22,13 @@ async function getSitePosts({ site, page }: z.infer<typeof schema>) {
     .single();
   if (error) return undefined;
 
-  const { post, ..._site } = data;
-  return { site: _site, posts: post as Post[] };
+  return { ...data, posts: data.post as Post[] };
 }
 
 export const revalidate = 86400;
 
 export default async function Page(props: Props) {
-  const params = await schema.safeParse(props.params);
+  const params = schema.safeParse(props.params);
   if (!params.success) redirect('/');
 
   const sitePosts = await getSitePosts(params.data);
@@ -41,7 +40,7 @@ export default async function Page(props: Props) {
       <div className="flex flex-col gap-2">
         <Breadcrumbs routes={[{ href: '/sites/page/1', name: 'sites' }]} />
         <h1 className="mb-1 font-fancy -tracking-[0.1em] text-3xl">
-          {sitePosts.site.name}
+          {sitePosts.name}
         </h1>
       </div>
       <section>
@@ -49,12 +48,12 @@ export default async function Page(props: Props) {
           {sitePosts.posts.map((post) => (
             <li key={post.slug}>
               <Card
-                href={`/sites/${sitePosts.site.slug}/${post.slug}`}
+                href={`/sites/${sitePosts.slug}/${post.slug}`}
                 title={post.title}
               >
                 <p className="flex items-center gap-2">
                   <User className="h-4 w-4 shrink-0 stroke-brand" aria-hidden />
-                  <span>{sitePosts.site.name}</span>
+                  <span>{sitePosts.name}</span>
                 </p>
                 <p className="flex items-center gap-2 text-2">
                   <Datetime>{post.pub_date}</Datetime>
@@ -66,8 +65,8 @@ export default async function Page(props: Props) {
       </section>
       <section>
         <Paginator
-          prev={`/sites/${sitePosts.site.slug}/page/${params.data.page - 1}`}
-          next={`/sites/${sitePosts.site.slug}/page/${params.data.page + 1}`}
+          prev={`/sites/${sitePosts.slug}/page/${params.data.page - 1}`}
+          next={`/sites/${sitePosts.slug}/page/${params.data.page + 1}`}
           isFirst={params.data.page === 1}
           isLast={sitePosts.posts.length < 30}
         />

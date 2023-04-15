@@ -25,7 +25,7 @@ async function getPost(props: z.infer<typeof schema>) {
 export const revalidate = 86400;
 
 export default async function Post(props: Props) {
-  const params = await schema.safeParse(props.params);
+  const params = schema.safeParse(props.params);
   if (!params.success) redirect('/sites/page/1');
 
   const post = await getPost(params.data);

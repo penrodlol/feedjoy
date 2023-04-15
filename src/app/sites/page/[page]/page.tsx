@@ -1,4 +1,4 @@
-import { paramsSchema } from '@/const/params';
+import { paramsSchema, type ParamsSchema } from '@/const/schemas';
 import supabase, { type Post } from '@/lib/supabase';
 import Card from '@/ui/card';
 import Datetime from '@/ui/datetime';
@@ -6,11 +6,10 @@ import Number from '@/ui/number';
 import Paginator from '@/ui/paginator';
 import { History, Library } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import type { z } from 'zod';
 
 type Props = { params: { page: string } };
 
-async function getSites(page: z.infer<typeof paramsSchema>['page']) {
+async function getSites(page: ParamsSchema['page']) {
   const { data, error } = await supabase
     .from('site')
     .select('slug, name, post!inner(pub_date)')
@@ -20,13 +19,16 @@ async function getSites(page: z.infer<typeof paramsSchema>['page']) {
     .range((page - 1) * 30, (page - 1) * 30 + 29);
   if (error) return undefined;
 
-  return data.map((site) => ({ ...site, post: site.post as Post[] }));
+  return data.map((site) => {
+    const posts = site.post as Post[];
+    return { ...site, posts, latestPost: posts[0] as Post };
+  });
 }
 
 export const revalidate = 86400;
 
 export default async function Page(props: Props) {
-  const params = await paramsSchema.safeParse(props.params);
+  const params = paramsSchema.safeParse(props.params);
   if (!params.success) redirect('/sites/page/1');
 
   const sites = await getSites(params.data.page);
@@ -44,12 +46,12 @@ export default async function Page(props: Props) {
                 <p className="flex items-center gap-2">
                   <Library className="h-4 w-4 shrink-0" aria-hidden />
                   <span>
-                    <Number>{site.post.length}</Number> posts
+                    <Number>{site.posts.length}</Number> posts
                   </span>
                 </p>
                 <p className="flex items-center gap-2">
                   <History className="h-4 w-4 shrink-0" aria-hidden />
-                  <Datetime>{site.post[0]!.pub_date}</Datetime>
+                  <Datetime>{site.latestPost.pub_date}</Datetime>
                 </p>
               </Card>
             </li>
