@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext"
+  },
+  "ts-node": { "esm": true },
+  "include": ["scripts/*.mts"]
+}
