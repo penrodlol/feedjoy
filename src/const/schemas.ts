@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-export type ParamsSchema = z.infer<typeof paramsSchema>;
+export type PageSchema = z.infer<typeof pageSchema>;
+export type SlugSchema = z.infer<typeof slugSchema>;
 
-export const paramsSchema = z.object({
-  page: z.preprocess(Number, z.number().positive().int()),
-});
+export const pageSchema = z.coerce.number().positive().int();
+export const slugSchema = z.coerce.string().uuid();

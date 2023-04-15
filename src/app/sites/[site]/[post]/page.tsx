@@ -1,3 +1,4 @@
+import { slugSchema } from '@/const/schemas';
 import supabase, { type Site } from '@/lib/supabase';
 import { Anchor } from '@/ui/anchor';
 import Breadcrumbs from '@/ui/breadcrumbs';
@@ -8,7 +9,7 @@ import { z } from 'zod';
 
 type Props = { params: { site: string; post: string } };
 
-const schema = z.object({ site: z.string(), post: z.string() });
+const schema = z.object({ site: slugSchema, post: slugSchema });
 
 async function getPost(props: z.infer<typeof schema>) {
   const { data, error } = await supabase

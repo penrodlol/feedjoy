@@ -1,4 +1,4 @@
-import { paramsSchema } from '@/const/schemas';
+import { pageSchema, slugSchema } from '@/const/schemas';
 import supabase, { type Post } from '@/lib/supabase';
 import Breadcrumbs from '@/ui/breadcrumbs';
 import Card from '@/ui/card';
@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 type Props = { params: { site: string; page: string } };
 
-const schema = paramsSchema.merge(z.object({ site: z.string() }));
+const schema = z.object({ page: pageSchema, site: slugSchema });
 
 async function getSitePosts({ site, page }: z.infer<typeof schema>) {
   const { data, error } = await supabase

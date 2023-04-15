@@ -1,4 +1,4 @@
-import { paramsSchema, type ParamsSchema } from '@/const/schemas';
+import { pageSchema, type PageSchema } from '@/const/schemas';
 import supabase, { type Post } from '@/lib/supabase';
 import Card from '@/ui/card';
 import Datetime from '@/ui/datetime';
@@ -6,10 +6,11 @@ import Number from '@/ui/number';
 import Paginator from '@/ui/paginator';
 import { History, Library } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { z } from 'zod';
 
 type Props = { params: { page: string } };
 
-async function getSites(page: ParamsSchema['page']) {
+async function getSites(page: PageSchema) {
   const { data, error } = await supabase
     .from('site')
     .select('slug, name, post!inner(pub_date)')
@@ -28,7 +29,7 @@ async function getSites(page: ParamsSchema['page']) {
 export const revalidate = 86400;
 
 export default async function Page(props: Props) {
-  const params = paramsSchema.safeParse(props.params);
+  const params = z.object({ page: pageSchema }).safeParse(props.params);
   if (!params.success) redirect('/sites/page/1');
 
   const sites = await getSites(params.data.page);

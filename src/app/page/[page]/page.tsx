@@ -1,14 +1,15 @@
-import { paramsSchema, type ParamsSchema } from '@/const/schemas';
+import { pageSchema, type PageSchema } from '@/const/schemas';
 import supabase, { type Site } from '@/lib/supabase';
 import Card from '@/ui/card';
 import Datetime from '@/ui/datetime';
 import Paginator from '@/ui/paginator';
 import { User } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { z } from 'zod';
 
 type Props = { params: { page: string } };
 
-async function getPosts(page: ParamsSchema['page']) {
+async function getPosts(page: PageSchema) {
   const { data, error } = await supabase
     .from('post')
     .select('slug, title, pub_date, site(slug, name)')
@@ -22,7 +23,7 @@ async function getPosts(page: ParamsSchema['page']) {
 export const revalidate = 86400;
 
 export default async function Page(props: Props) {
-  const params = paramsSchema.safeParse(props.params);
+  const params = z.object({ page: pageSchema }).safeParse(props.params);
   if (!params.success) redirect('/');
 
   const posts = await getPosts(params.data.page);
