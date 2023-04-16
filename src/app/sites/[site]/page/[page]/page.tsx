@@ -1,8 +1,8 @@
+import { datetimeFrmt } from '@/const/formatters';
 import { pageSchema, slugSchema } from '@/const/schemas';
 import supabase, { type Post } from '@/lib/supabase';
 import Breadcrumbs from '@/ui/breadcrumbs';
 import Card from '@/ui/card';
-import Datetime from '@/ui/datetime';
 import Paginator from '@/ui/paginator';
 import { User } from 'lucide-react';
 import { redirect } from 'next/navigation';
@@ -56,7 +56,9 @@ export default async function Page(props: Props) {
                   <span>{sitePosts.name}</span>
                 </p>
                 <p className="flex items-center gap-2 text-2">
-                  <Datetime>{post.pub_date}</Datetime>
+                  <time dateTime={new Date(post.pub_date).toISOString()}>
+                    {datetimeFrmt.format(new Date(post.pub_date))}
+                  </time>
                 </p>
               </Card>
             </li>

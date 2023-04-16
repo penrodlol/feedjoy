@@ -1,8 +1,7 @@
+import { datetimeFrmt, numberFrmt } from '@/const/formatters';
 import supabase, { type Site } from '@/lib/supabase';
 import { NextAnchor } from '@/ui/anchor';
 import Card from '@/ui/card';
-import Datetime from '@/ui/datetime';
-import Number from '@/ui/number';
 import { ArrowRight, User } from 'lucide-react';
 
 async function getRoot() {
@@ -18,6 +17,7 @@ async function getRecentPosts() {
     .order('pub_date', { ascending: false })
     .limit(6);
   if (error) throw new Error(error.message);
+
   return data.map((post) => ({ ...post, site: post.site as Site }));
 }
 
@@ -37,15 +37,15 @@ export default async function Home() {
         <ul className="flex max-w-max items-center gap-fluid-4 overflow-x-auto pb-1">
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
             <span className="text-2">total posts:</span>
-            <Number>{totalposts}</Number>
+            <span>{numberFrmt.format(totalposts)}</span>
           </li>
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
             <span className="text-2">total sites:</span>
-            <Number>{totalsites}</Number>
+            <span>{numberFrmt.format(totalsites)}</span>
           </li>
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
             <span className="text-2">posts this week:</span>
-            <Number>{postweek}</Number>
+            <span>{numberFrmt.format(postweek)}</span>
           </li>
         </ul>
       </section>
@@ -63,7 +63,9 @@ export default async function Home() {
                   <User className="h-4 w-4 shrink-0" aria-hidden />
                   <span>{post.site.name}</span>
                 </p>
-                <Datetime>{post.pub_date}</Datetime>
+                <time dateTime={new Date(post.pub_date).toISOString()}>
+                  {datetimeFrmt.format(new Date(post.pub_date))}
+                </time>
               </Card>
             </li>
           ))}

@@ -1,7 +1,7 @@
+import { datetimeFrmt } from '@/const/formatters';
 import { pageSchema, type PageSchema } from '@/const/schemas';
 import supabase, { type Site } from '@/lib/supabase';
 import Card from '@/ui/card';
-import Datetime from '@/ui/datetime';
 import Paginator from '@/ui/paginator';
 import { User } from 'lucide-react';
 import { redirect } from 'next/navigation';
@@ -45,7 +45,9 @@ export default async function Page(props: Props) {
                   <User className="h-4 w-4 shrink-0" aria-hidden />
                   <span>{post.site.name}</span>
                 </p>
-                <Datetime>{post.pub_date}</Datetime>
+                <time dateTime={new Date(post.pub_date).toISOString()}>
+                  {datetimeFrmt.format(new Date(post.pub_date))}
+                </time>
               </Card>
             </li>
           ))}

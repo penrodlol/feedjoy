@@ -1,8 +1,8 @@
+import { datetimeFrmt } from '@/const/formatters';
 import { slugSchema } from '@/const/schemas';
 import supabase, { type Site } from '@/lib/supabase';
 import { Anchor } from '@/ui/anchor';
 import Breadcrumbs from '@/ui/breadcrumbs';
-import Datetime from '@/ui/datetime';
 import { Calendar, User } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
@@ -49,7 +49,9 @@ export default async function Post(props: Props) {
           </div>
           <div className="flex items-center gap-2">
             <Calendar className="h-5 w-5" aria-hidden />
-            <Datetime>{post.pub_date}</Datetime>
+            <time dateTime={new Date(post.pub_date).toISOString()}>
+              {datetimeFrmt.format(new Date(post.pub_date))}
+            </time>
           </div>
         </div>
         <div className="my-5 h-1.5 rounded bg-2"></div>

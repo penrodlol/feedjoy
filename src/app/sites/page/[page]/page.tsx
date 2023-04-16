@@ -1,8 +1,7 @@
+import { datetimeFrmt, numberFrmt } from '@/const/formatters';
 import { pageSchema, type PageSchema } from '@/const/schemas';
 import supabase, { type Post } from '@/lib/supabase';
 import Card from '@/ui/card';
-import Datetime from '@/ui/datetime';
-import Number from '@/ui/number';
 import Paginator from '@/ui/paginator';
 import { History, Library } from 'lucide-react';
 import { redirect } from 'next/navigation';
@@ -22,7 +21,7 @@ async function getSites(page: PageSchema) {
 
   return data.map((site) => {
     const posts = site.post as Post[];
-    return { ...site, posts, latestPost: posts[0] as Post };
+    return { ...site, posts, latest: posts[0] as Post };
   });
 }
 
@@ -46,13 +45,13 @@ export default async function Page(props: Props) {
               <Card href={`/sites/${site.slug}/page/1`} title={site.name}>
                 <p className="flex items-center gap-2">
                   <Library className="h-4 w-4 shrink-0" aria-hidden />
-                  <span>
-                    <Number>{site.posts.length}</Number> posts
-                  </span>
+                  <span>{numberFrmt.format(site.posts.length)} posts</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <History className="h-4 w-4 shrink-0" aria-hidden />
-                  <Datetime>{site.latestPost.pub_date}</Datetime>
+                  <time dateTime={new Date(site.latest.pub_date).toISOString()}>
+                    {datetimeFrmt.format(new Date(site.latest.pub_date))}
+                  </time>
                 </p>
               </Card>
             </li>
