@@ -7,6 +7,8 @@ import { Calendar, User } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
+export const revalidate = 86400;
+
 type Props = { params: { site: string; post: string } };
 
 const schema = z.object({ site: slugSchema, post: slugSchema });
@@ -22,8 +24,6 @@ async function getPost(props: z.infer<typeof schema>) {
 
   return { ...data, site: data.site as Site };
 }
-
-export const revalidate = 86400;
 
 export default async function Post(props: Props) {
   const params = schema.safeParse(props.params);

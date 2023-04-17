@@ -19,12 +19,11 @@ async function getRecentPosts() {
     .order('pub_date', { ascending: false })
     .limit(6);
   if (error) throw new Error(error.message);
-
   return data.map((post) => ({ ...post, site: post.site as Site }));
 }
 
 export default async function Home() {
-  const [stats, recentPosts] = await Promise.all([getRoot(), getRecentPosts()]);
+  const [root, recentPosts] = await Promise.all([getRoot(), getRecentPosts()]);
 
   return (
     <div className="mx-auto my-fluid-4 flex max-w-screen-md flex-col gap-fluid-3">
@@ -36,15 +35,15 @@ export default async function Home() {
         <ul className="flex max-w-max items-center gap-fluid-4 overflow-x-auto pb-1">
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
             <span className="text-2">total posts:</span>
-            <span>{numberFrmt.format(stats.totalposts)}</span>
+            <span>{numberFrmt.format(root.totalposts)}</span>
           </li>
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
             <span className="text-2">total sites:</span>
-            <span>{numberFrmt.format(stats.totalsites)}</span>
+            <span>{numberFrmt.format(root.totalsites)}</span>
           </li>
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
             <span className="text-2">posts this week:</span>
-            <span>{numberFrmt.format(stats.postweek)}</span>
+            <span>{numberFrmt.format(root.postweek)}</span>
           </li>
         </ul>
       </section>

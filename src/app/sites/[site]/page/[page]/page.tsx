@@ -8,6 +8,8 @@ import { User } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
+export const revalidate = 86400;
+
 type Props = { params: { site: string; page: string } };
 
 const schema = z.object({ page: pageSchema, site: slugSchema });
@@ -24,8 +26,6 @@ async function getSitePosts({ site, page }: z.infer<typeof schema>) {
 
   return { ...data, posts: data.post as Post[] };
 }
-
-export const revalidate = 86400;
 
 export default async function Page(props: Props) {
   const params = schema.safeParse(props.params);
@@ -52,7 +52,7 @@ export default async function Page(props: Props) {
                 title={post.title}
               >
                 <p className="flex items-center gap-2">
-                  <User className="h-4 w-4 shrink-0 stroke-brand" aria-hidden />
+                  <User className="h-4 w-4 shrink-0" aria-hidden />
                   <span>{sitePosts.name}</span>
                 </p>
                 <p className="flex items-center gap-2 text-2">

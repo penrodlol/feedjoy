@@ -7,6 +7,8 @@ import { History, Library } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
+export const revalidate = 86400;
+
 type Props = { params: { page: string } };
 
 async function getSites(page: PageSchema) {
@@ -24,8 +26,6 @@ async function getSites(page: PageSchema) {
     return { ...site, posts, latest: posts[0] as Post };
   });
 }
-
-export const revalidate = 86400;
 
 export default async function Page(props: Props) {
   const params = z.object({ page: pageSchema }).safeParse(props.params);
