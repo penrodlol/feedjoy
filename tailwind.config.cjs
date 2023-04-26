@@ -12,7 +12,6 @@ module.exports = {
       textColor: { 1: '#d0d0d0', 2: '#7b7b7b' },
       backgroundColor: { 1: '#0e0f11', 2: '#151515', 3: '#242424' },
       colors: { brand: '#fff' },
-      fontWeight: { 1: 300, 2: 400, 3: 500 },
       spacing: {
         'fluid-1': 'clamp(0.25rem, calc(-0.09rem + 1.71vw), 1.13rem)',
         'fluid-2': 'clamp(0.5rem, calc(0.11rem + 1.95vw), 1.5rem)',

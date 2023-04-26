@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Kaisei_Tokumin, Taviraj } from 'next/font/google';
 import type { ReactNode } from 'react';
 import 'tailwindcss/tailwind.css';
+import Search from './search';
 
 const taviraj = Taviraj({
   weight: ['400', '700'],
@@ -52,14 +53,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${taviraj.variable} ${kaisei.variable}`}>
       <body
-        className={`mx-auto flex min-h-screen max-w-screen-lg flex-col bg-1 px-fluid-4 
+        className={`!mx-auto flex min-h-screen max-w-screen-lg flex-col bg-1 px-fluid-4 
                   text-1 text-base selection:bg-brand selection:text-black`}
       >
-        <header
-          className={`m-4 mx-auto flex w-full max-w-screen-sm items-center justify-between
-                      rounded bg-2 px-4 py-2 shadow`}
-        >
-          <NextAnchor href="/" aria-label="Home">
+        <header className="mx-auto my-4 flex w-full items-center gap-4 rounded bg-2 px-4 py-2 shadow">
+          <NextAnchor href="/" className="mr-auto" aria-label="Home">
             <Home className="h-5 w-5" aria-hidden />
           </NextAnchor>
           <nav>
@@ -75,6 +73,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </li>
             </ul>
           </nav>
+          <div className="w-0.5 self-stretch rounded bg-3" />
+          <Search />
         </header>
         <main className="flex-1 pb-fluid-4 motion-safe:animate-fade-in">
           {children}
