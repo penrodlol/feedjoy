@@ -41,10 +41,9 @@ module.exports = {
             '&-thumb': { backgroundColor: theme('backgroundColor.2') },
           },
           '&:focus-visible': {
-            outline: `2px solid ${theme('colors.brand')}`,
-            outlineWidth: theme('outlineWidth.1'),
-            outlineOffset: theme('outlineOffset.4'),
+            outline: `0.5px solid ${theme('colors.brand')}`,
             borderRadius: theme('borderRadius.sm'),
+            outlineOffset: theme('outlineOffset.2'),
           },
         },
       }),
