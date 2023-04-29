@@ -16,6 +16,8 @@ export default function SearchOutput(props: { onClick: () => void }) {
       return <Loading />;
     case 'empty':
       return <Empty />;
+    case 'error':
+      return <Error />;
     default:
       return (
         <ul className="flex flex-col gap-4">
@@ -66,6 +68,17 @@ function Empty() {
     <div className="mx-auto mt-24 max-w-max text-center">
       <p className="text-xl">no posts found</p>
       <p className="max-w-[40ch] text-2 text-sm">try adjusting your query</p>
+    </div>
+  );
+}
+
+function Error() {
+  return (
+    <div className="mx-auto mt-24 max-w-max text-center">
+      <p className="text-xl">something went wrong</p>
+      <p className="max-w-[40ch] text-2 text-sm">
+        please try again in a few minutes
+      </p>
     </div>
   );
 }
