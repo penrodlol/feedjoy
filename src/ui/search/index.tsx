@@ -1,8 +1,8 @@
 'use client';
 
 import * as Radix from '@radix-ui/react-dialog';
-import { SearchIcon, X } from 'lucide-react';
-import { useState } from 'react';
+import { CommandIcon, SearchIcon, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import SearchInput from './search-input';
 import SearchOutput from './search-output';
 import { reset } from './store';
@@ -10,12 +10,22 @@ import { reset } from './store';
 export default function Search() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'k' && e.metaKey) setOpen(true);
+    });
+  }, []);
+
   return (
     <Radix.Root open={open} onOpenChange={(open) => (setOpen(open), reset())}>
       <Radix.Trigger asChild>
-        <button className="group flex items-center gap-2 rounded bg-3 px-2 py-0.5 shadow text-xs">
+        <button className="group flex select-none items-center gap-2 rounded bg-3 px-2 py-0.5 shadow text-xs">
           <SearchIcon className="w-3 group-hover:stroke-brand" aria-hidden />
           <span className="group-hover:text-brand">search posts</span>
+          <div className="flex items-center gap-1 rounded bg-1 px-1">
+            <CommandIcon className="h-3 w-3" aria-hidden />
+            <kbd className="translate-y-[1px]">K</kbd>
+          </div>
         </button>
       </Radix.Trigger>
       <Radix.Portal>
