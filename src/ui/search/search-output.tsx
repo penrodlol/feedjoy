@@ -6,7 +6,7 @@ import { Loader2, User } from 'lucide-react';
 import Card from '../card';
 import { store } from './store';
 
-export default function SearchOutput(props: { onClick: () => void }) {
+export default function SearchOutput() {
   const $store = useStore(store);
 
   switch ($store.status) {
@@ -26,7 +26,6 @@ export default function SearchOutput(props: { onClick: () => void }) {
               <Card
                 title={post.title}
                 href={`/sites/${post.site.slug}/${post.slug}`}
-                onClick={() => props.onClick()}
               >
                 <p className="flex items-center gap-2">
                   <User className="h-4 w-4 shrink-0" />
