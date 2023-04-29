@@ -12,7 +12,7 @@ export default function SearchInput() {
 
   return (
     <form
-      className="flex items-center gap-2 text-sm"
+      className="flex flex-col items-center gap-2 text-sm sm:flex-row"
       onReset={() => (reset(), setLastQuery(undefined), setDisabled(true))}
       onSubmit={async (e) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ export default function SearchInput() {
         await search(new FormData(e.currentTarget));
       }}
     >
-      <div className="flex flex-1 items-center rounded bg-3 shadow">
+      <div className="flex flex-1 items-center self-stretch rounded bg-3 shadow">
         <Search className="my-1 ml-2 mr-2 h-4 w-4" aria-hidden />
         <input
           ref={inputRef}
@@ -38,11 +38,17 @@ export default function SearchInput() {
           onChange={(e) => setDisabled(!e.currentTarget.value.trim().length)}
         />
       </div>
-      <Button type="submit" disabled={disabled}>
-        search
-      </Button>
-      <Button variant="outline" type="reset" disabled={disabled}>
+
+      <Button
+        variant="outline"
+        type="reset"
+        className="self-stretch"
+        disabled={disabled}
+      >
         clear
+      </Button>
+      <Button type="submit" className="self-stretch" disabled={disabled}>
+        search
       </Button>
     </form>
   );

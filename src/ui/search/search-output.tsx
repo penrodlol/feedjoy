@@ -58,7 +58,7 @@ function Loading() {
   return (
     <div className="mt-24 flex flex-col items-center gap-2 text-center">
       <Loader2 className="h-10 w-10 motion-safe:animate-spin" aria-hidden />
-      <p className="text-xl">loading posts...</p>
+      <p className="text-xl">searching posts...</p>
     </div>
   );
 }

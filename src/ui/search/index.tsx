@@ -21,8 +21,9 @@ export default function Search() {
       <Radix.Portal>
         <Radix.Overlay className="fixed inset-0 bg-3 bg-opacity-90" />
         <Radix.Content
-          className="fixed left-1/2 top-1/2 flex h-[70vh] w-[90vw] max-w-screen-sm -translate-x-1/2
-                     -translate-y-1/2 flex-col gap-4 rounded bg-1 px-7 py-3 shadow motion-safe:animate-fade-in"
+          className="fixed left-1/2 top-1/2 flex h-[90vh] w-[90vw] max-w-screen-sm -translate-x-1/2
+                     -translate-y-1/2 flex-col gap-4 rounded bg-1 px-5 py-3 shadow
+                     motion-safe:animate-fade-in md:h-[70vh]"
         >
           <Radix.Title className="text-lg">search posts</Radix.Title>
           <Radix.Close asChild>
@@ -31,7 +32,7 @@ export default function Search() {
             </button>
           </Radix.Close>
           <SearchInput />
-          <div className="my-4 overflow-y-auto px-2">
+          <div className="my-4 overflow-y-auto px-1">
             <SearchOutput onClick={() => setOpen(false)} />
           </div>
         </Radix.Content>

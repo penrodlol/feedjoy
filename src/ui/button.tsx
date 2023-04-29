@@ -5,7 +5,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant };
 
 const variants = {
   brand:
-    'bg-brand [&>*]:invert enabled:hover:bg-opacity-90 ' +
+    'bg-brand bg-opacity-95 [&>*]:invert enabled:hover:bg-opacity-80 ' +
     'disabled:opacity-50',
   outline:
     'outline outline-1 outline-brand enabled:hover:bg-brand ' +
