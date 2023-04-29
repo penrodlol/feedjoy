@@ -1,10 +1,10 @@
 import { Anchor, NextAnchor } from '@/ui/anchor';
+import Search from '@/ui/search';
 import { Home } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Kaisei_Tokumin, Taviraj } from 'next/font/google';
 import type { ReactNode } from 'react';
 import 'tailwindcss/tailwind.css';
-import Search from './search';
 
 const taviraj = Taviraj({
   weight: ['400', '700'],

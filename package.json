@@ -11,10 +11,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nanostores/react": "^0.5.0",
     "@radix-ui/react-dialog": "^1.0.3",
     "@supabase/supabase-js": "^2.20.0",
     "encoding": "^0.1.13",
     "lucide-react": "^0.144.0",
+    "nanostores": "^0.8.1",
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
