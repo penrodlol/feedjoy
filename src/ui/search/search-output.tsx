@@ -43,7 +43,7 @@ export default function SearchOutput(props: { onClick: () => void }) {
 
 function Pristine() {
   return (
-    <div className="mt-24">
+    <div className="mx-auto mt-24 max-w-max">
       <p className="text-xl">discover posts accross sites</p>
       <p className="max-w-[40ch] text-2 text-sm">
         query a post title or summary in the search bar above to begin
@@ -63,7 +63,7 @@ function Loading() {
 
 function Empty() {
   return (
-    <div className="mt-24 text-center">
+    <div className="mx-auto mt-24 max-w-max text-center">
       <p className="text-xl">no posts found</p>
       <p className="max-w-[40ch] text-2 text-sm">try adjusting your query</p>
     </div>

@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const { data: posts, error } = await supabase
     .from('post')
     .select('slug, title, pub_date, site(slug, name)')
-    .textSearch('title', payload.data)
+    .textSearch('fts', `'${payload.data}'`)
     .limit(30);
 
   return error

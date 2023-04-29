@@ -31,7 +31,7 @@ export default function Search() {
             </button>
           </Radix.Close>
           <SearchInput />
-          <div className="my-4 self-center overflow-y-auto px-2">
+          <div className="my-4 overflow-y-auto px-2">
             <SearchOutput onClick={() => setOpen(false)} />
           </div>
         </Radix.Content>
