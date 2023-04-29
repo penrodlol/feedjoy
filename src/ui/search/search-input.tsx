@@ -21,6 +21,11 @@ export default function SearchInput() {
 
         setLastSubmit(input);
         await search(new FormData(e.currentTarget));
+
+        if (inputRef.current) {
+          inputRef.current.value = input;
+          inputRef.current.blur();
+        }
       }}
     >
       <Search className="absolute left-3 h-3 w-3" aria-hidden />
