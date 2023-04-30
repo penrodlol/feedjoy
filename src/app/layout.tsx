@@ -23,7 +23,7 @@ const kaisei = Kaisei_Tokumin({
 
 export const metadata: Metadata = {
   title: 'feedjoy',
-  description: 'a minimal rss feed congregator',
+  description: 'a minimal rss feed aggregator',
   icons: { shortcut: '/favicon.svg' },
   creator: 'christian penrod',
   publisher: 'christian penrod',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'feedjoy',
-    description: 'a minimal rss feed congregator',
+    description: 'a minimal rss feed aggregator',
     url: `${process.env.SITE}`,
     siteName: 'feedjoy',
     locale: 'en_US',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'feedjoy',
-    description: 'a minimal rss feed congregator',
+    description: 'a minimal rss feed aggregator',
     card: 'summary_large_image',
     images: `${process.env.SITE}/og.png`,
   },

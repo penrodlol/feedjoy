@@ -30,7 +30,7 @@ export default async function Home() {
       <section>
         <h1 className="mb-2 font-fancy -tracking-[0.1em] text-6xl">feedjoy</h1>
         <p className="mb-fluid-4 text-2 text-lg">
-          a minimal rss feed congregator
+          a minimal rss feed aggregator
         </p>
         <ul className="flex max-w-max items-center gap-fluid-4 overflow-x-auto pb-1">
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
