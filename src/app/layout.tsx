@@ -1,5 +1,6 @@
 import { Anchor, NextAnchor } from '@/ui/anchor';
 import Search from '@/ui/search';
+import SearchHero from '@/ui/search/search-hero';
 import { Home } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Kaisei_Tokumin, Taviraj } from 'next/font/google';
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   icons: { shortcut: '/favicon.svg' },
   creator: 'christian penrod',
   publisher: 'christian penrod',
-  keywords: 'rss, nextjs, openai, tailwindcss',
+  keywords: 'rss, nextjs, openai, tailwindcss, supabase',
   robots: {
     index: true,
     follow: true,
@@ -68,7 +69,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <li><NextAnchor href="/about">about</NextAnchor></li>
             </ul>
           </nav>
-          <Search />
+          <Search>
+            {/* @ts-expect-error Async Server Component */}
+            <SearchHero />
+          </Search>
         </div>
         <main className="flex-1 pb-fluid-4 motion-safe:animate-fade-in">
           {children}

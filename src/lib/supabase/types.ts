@@ -96,6 +96,14 @@ export interface Database {
         };
         Returns: undefined;
       };
+      get_random_topics: {
+        Args: {
+          amount: number;
+        };
+        Returns: {
+          name: string;
+        }[];
+      };
       get_root_summary: {
         Args: Record<PropertyKey, never>;
         Returns: {

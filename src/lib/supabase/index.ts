@@ -3,6 +3,7 @@ import type { Database } from './types';
 
 export type Site = Database['public']['Tables']['site']['Row'];
 export type Post = Database['public']['Tables']['post']['Row'];
+export type Topic = Database['public']['Tables']['topic']['Row'];
 
 export default createClient<Database>(
   `${process.env.SUPABASE_URL}`,

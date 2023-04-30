@@ -3,12 +3,12 @@
 import * as Radix from '@radix-ui/react-dialog';
 import { CommandIcon, SearchIcon, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import SearchInput from './search-input';
 import SearchOutput from './search-output';
 import { reset } from './store';
 
-export default function Search() {
+export default function Search({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -51,7 +51,7 @@ export default function Search() {
           </Radix.Close>
           <SearchInput />
           <div className="my-4 overflow-y-auto px-1">
-            <SearchOutput />
+            <SearchOutput>{children}</SearchOutput>
           </div>
         </Radix.Content>
       </Radix.Portal>
