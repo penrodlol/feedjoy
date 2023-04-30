@@ -22,8 +22,8 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      # - name: Fetch Posts
-      #   run: npx ts-node .github/scripts/posts.mts
+      - name: Fetch Posts
+        run: npx ts-node .github/scripts/posts.mts
 
-      # - name: Fetch Summaries/Topics
-      #   run: npx ts-node .github/scripts/summaries-topics.mts
+      - name: Fetch Summaries/Topics
+        run: npx ts-node .github/scripts/summaries-topics.mts
