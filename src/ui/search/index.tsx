@@ -50,7 +50,7 @@ export default function Search({ children }: { children: ReactNode }) {
             </button>
           </Radix.Close>
           <SearchInput />
-          <div className="my-4 overflow-y-auto px-1">
+          <div className="my-4 flex-1 overflow-y-auto px-1">
             <SearchOutput>{children}</SearchOutput>
           </div>
         </Radix.Content>

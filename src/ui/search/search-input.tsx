@@ -22,10 +22,7 @@ export default function SearchInput() {
         setLastSubmit(input);
         await search(new FormData(e.currentTarget));
 
-        if (inputRef.current) {
-          inputRef.current.value = input;
-          inputRef.current.blur();
-        }
+        if (inputRef.current) inputRef.current.value = input;
       }}
     >
       <Search className="absolute left-3 h-3 w-3" aria-hidden />
@@ -33,7 +30,6 @@ export default function SearchInput() {
         ref={inputRef}
         type="text"
         name="query"
-        autoFocus
         autoComplete="off"
         spellCheck="false"
         className="flex-1 bg-transparent px-8 py-1 placeholder:text-2 focus:outline-none"
