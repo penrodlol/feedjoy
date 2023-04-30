@@ -61,6 +61,23 @@ export interface Database {
           url?: string;
         };
       };
+      topic: {
+        Row: {
+          id: number;
+          name: string;
+          post_id: number;
+        };
+        Insert: {
+          id?: number;
+          name: string;
+          post_id: number;
+        };
+        Update: {
+          id?: number;
+          name?: string;
+          post_id?: number;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
