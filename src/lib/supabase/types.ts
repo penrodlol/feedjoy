@@ -11,6 +11,7 @@ export interface Database {
     Tables: {
       post: {
         Row: {
+          fts: unknown | null;
           id: number;
           link: string;
           pub_date: string;
@@ -20,6 +21,7 @@ export interface Database {
           title: string;
         };
         Insert: {
+          fts?: unknown | null;
           id?: number;
           link: string;
           pub_date: string;
@@ -29,6 +31,7 @@ export interface Database {
           title: string;
         };
         Update: {
+          fts?: unknown | null;
           id?: number;
           link?: string;
           pub_date?: string;
@@ -58,6 +61,23 @@ export interface Database {
           url?: string;
         };
       };
+      topic: {
+        Row: {
+          id: number;
+          name: string;
+          post_id: number;
+        };
+        Insert: {
+          id?: number;
+          name: string;
+          post_id: number;
+        };
+        Update: {
+          id?: number;
+          name?: string;
+          post_id?: number;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
@@ -75,6 +95,14 @@ export interface Database {
           summaries: Json;
         };
         Returns: undefined;
+      };
+      get_random_topics: {
+        Args: {
+          amount: number;
+        };
+        Returns: {
+          name: string;
+        }[];
       };
       get_root_summary: {
         Args: Record<PropertyKey, never>;

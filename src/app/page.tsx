@@ -47,7 +47,7 @@ export default async function Home() {
           </li>
         </ul>
       </section>
-      <div className="h-1.5 w-full self-center rounded bg-2"></div>
+      <div className="h-1.5 w-full self-center rounded bg-2" />
       <section className="flex flex-col gap-2">
         <h2 className="text-2 text-lg">recent posts</h2>
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">

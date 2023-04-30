@@ -25,11 +25,10 @@ const summaries = await Promise.all(
     const root = $('main').length > 0 ? $('main p') : $('body p');
     const text = decode(encode(root.text()).slice(0, 8000));
 
+    const content = `Summarize in 1 paragraph: ${text}`;
     const payload = await openai.createChatCompletion({
       model: 'gpt-4',
-      messages: [
-        { role: 'user', content: `Summarize in 1 paragraph: ${text}` },
-      ],
+      messages: [{ role: 'user', content }],
     });
 
     const summary = payload.data.choices?.[0]?.message?.content;
@@ -37,7 +36,29 @@ const summaries = await Promise.all(
   }),
 );
 
-const payload = await supabase.rpc('bulk_update_summaries', {
-  summaries: summaries.filter((summary) => !!summary),
-});
-if (payload.error) throw payload.error;
+await Promise.all(
+  summaries?.map(async (payload) => {
+    if (!payload?.id || !payload?.summary) return;
+
+    const postsWithSummaries = await supabase
+      .from('post')
+      .update({ summary: payload.summary })
+      .eq('id', payload.id);
+    if (postsWithSummaries.error) throw postsWithSummaries.error;
+
+    const content = `Give me a list of 2 comma separated technical tools from this text:\n\n${payload.summary}`;
+    const topicsPayload = await openai.createChatCompletion({
+      model: 'gpt-4',
+      messages: [{ role: 'user', content }],
+    });
+
+    const _topics = topicsPayload.data.choices[0]?.message?.content?.split(',');
+    const topics = _topics?.map((topic) => topic.trim()).slice(0, 2);
+    if (topics?.length !== 2) return;
+
+    const postsWithTopics = await supabase
+      .from('topic')
+      .insert(topics.map((name) => ({ name, post_id: payload.id })));
+    if (postsWithTopics.error) throw postsWithTopics.error;
+  }),
+);

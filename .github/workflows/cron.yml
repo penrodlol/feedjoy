@@ -25,5 +25,5 @@ jobs:
       # - name: Fetch Posts
       #   run: npx ts-node .github/scripts/posts.mts
 
-      # - name: Fetch Summaries
-      #   run: npx ts-node .github/scripts/summaries.mts
+      # - name: Fetch Summaries/Topics
+      #   run: npx ts-node .github/scripts/summaries-topics.mts
