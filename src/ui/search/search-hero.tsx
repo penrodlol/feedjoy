@@ -24,12 +24,15 @@ export default async function SearchHero() {
 
   return (
     <div className="mx-auto mt-10 flex max-w-max flex-col gap-2">
-      <span className="text-fancy -tracking-[0.1em] text-5xl">
+      <span className="text-fancy -tracking-[0.1em] text-4xl">
         feedjoy search
       </span>
-      <p className="text-2 [&>strong]:text-1">
-        traverse <strong>{numberFrmt.format(root.totalposts)}</strong> posts on{' '}
-        <strong>{numberFrmt.format(root.totalsites)}</strong> sites
+      <p className="text-2 text-base [&>strong]:text-1">
+        traverse{' '}
+        <span className="text-1">{numberFrmt.format(root.totalposts)}</span>{' '}
+        posts on{' '}
+        <span className="text-1">{numberFrmt.format(root.totalsites)}</span>{' '}
+        sites
       </p>
       <div className="mb-10 h-1 rounded bg-3" />
       <div className="flex flex-col gap-1">

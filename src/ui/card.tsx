@@ -15,7 +15,7 @@ export default function Card<T extends string>(props: Props<T>) {
       <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 text-2">
         {props.children}
       </div>
-      <p className="px-2 text-sm">{props.title}</p>
+      <p className="px-2">{props.title}</p>
     </Link>
   );
 }

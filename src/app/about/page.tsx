@@ -5,7 +5,7 @@ export default function About() {
     <div className="mx-auto mt-fluid-6 flex max-w-screen-sm flex-col gap-fluid-2">
       <h1 className="mb-2 font-fancy -tracking-[0.1em] text-6xl">feedjoy</h1>
       <div className="h-1.5 w-full self-center rounded bg-2"></div>
-      <div className="flex flex-col gap-4 leading-relaxed">
+      <div className="flex flex-col gap-4 leading-relaxed text-base">
         <p>
           A minimal tech blog RSS feed aggregator. Serving as a centralized
           proxy for blog posts I find valuable.

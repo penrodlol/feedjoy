@@ -32,7 +32,7 @@ export default async function Home() {
         <p className="mb-fluid-4 text-2 text-lg">
           a minimal rss feed aggregator
         </p>
-        <ul className="flex max-w-max items-center gap-fluid-4 overflow-x-auto pb-1">
+        <ul className="flex max-w-max items-center gap-fluid-4 overflow-x-auto pb-1 text-base">
           <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
             <span className="text-2">total posts:</span>
             <span>{numberFrmt.format(root.totalposts)}</span>

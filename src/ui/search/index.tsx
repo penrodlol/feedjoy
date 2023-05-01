@@ -26,7 +26,7 @@ export default function Search({ children }: { children: ReactNode }) {
     <Radix.Root open={open} onOpenChange={(open) => (setOpen(open), reset())}>
       <Radix.Trigger asChild>
         <button className="group flex select-none items-center gap-2 rounded bg-3 px-2 py-0.5 shadow text-xs">
-          <SearchIcon className="w-4 group-hover:stroke-brand" aria-hidden />
+          <SearchIcon className="w-3 group-hover:stroke-brand" aria-hidden />
           <span className="hidden group-hover:text-brand sm:block">
             search posts
           </span>

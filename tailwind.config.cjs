@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-taviraj)'],
-        fancy: ['var(--font-kaisei)'],
+        sans: ['var(--font-taviraj)', ...fontFamily.sans],
+        fancy: ['var(--font-kaisei)', ...fontFamily.sans],
       },
       textColor: { 1: '#d0d0d0', 2: '#7b7b7b' },
       backgroundColor: { 1: '#0e0f11', 2: '#151515', 3: '#242424' },
