@@ -6,20 +6,17 @@ import { useState } from 'react';
 import { reset, search, store } from './store';
 
 export default function SearchForm() {
-  const { status } = useStore(store);
-  const [input, setInput] = useState<string>();
-  const [prevInput, setPrevInput] = useState<string>();
+  const { status, query } = useStore(store);
+  const [nextQuery, setNextQuery] = useState<string>();
 
   return (
     <form
       className="relative flex items-center gap-2 rounded bg-3 shadow"
-      onReset={() => (reset(), setInput(undefined), setPrevInput(undefined))}
-      action={async (formData) => {
-        const _input = input?.trim();
-        if (!_input || _input === prevInput) return;
-
-        setPrevInput(_input);
-        await search(formData);
+      onReset={() => (reset(), setNextQuery(undefined))}
+      action={async () => {
+        const _nextQuery = nextQuery?.trim();
+        if (!_nextQuery?.length || _nextQuery === query) return;
+        await search(_nextQuery);
       }}
     >
       <Search className="absolute left-3 h-3 w-3" aria-hidden />
@@ -32,10 +29,11 @@ export default function SearchForm() {
                    focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"
         placeholder="post title or summary"
         aria-label="search posts by title or summary"
+        defaultValue={query}
         disabled={status === 'loading'}
-        onInput={(event) => setInput(event.currentTarget.value)}
+        onInput={(event) => setNextQuery(event.currentTarget.value)}
       />
-      {!!input?.length && (
+      {(!!nextQuery?.length || !!query?.length) && (
         <button
           className="group absolute right-0 p-1 disabled:cursor-not-allowed
                      disabled:opacity-75 motion-safe:animate-fade-in"

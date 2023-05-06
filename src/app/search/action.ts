@@ -5,8 +5,8 @@ import { z } from 'zod';
 
 export type SearchPosts = Awaited<ReturnType<typeof searchPosts>>;
 
-export async function searchPosts(formData: FormData) {
-  const query = z.string().trim().nonempty().safeParse(formData.get('query'));
+export async function searchPosts(payload: string) {
+  const query = z.string().trim().nonempty().safeParse(payload);
   if (!query.success) return undefined;
 
   const { data, error } = await supabase
