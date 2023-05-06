@@ -15,22 +15,22 @@
     "@radix-ui/react-dialog": "^1.0.3",
     "@supabase/supabase-js": "^2.21.0",
     "encoding": "^0.1.13",
-    "lucide-react": "^0.190.0",
+    "lucide-react": "^0.211.0",
     "nanostores": "^0.8.1",
-    "next": "13.3.2",
+    "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@types/node": "18.16.3",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1",
+    "@types/node": "20.1.0",
+    "@types/react": "18.2.5",
+    "@types/react-dom": "18.2.4",
     "@types/user-agents": "^1.0.2",
     "autoprefixer": "10.4.14",
     "cheerio": "^1.0.0-rc.12",
-    "eslint": "8.39.0",
-    "eslint-config-next": "13.3.2",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.1",
     "gpt-3-encoder": "^1.1.4",
     "openai": "^3.2.1",
     "postcss": "8.4.23",
@@ -40,6 +40,6 @@
     "tailwindcss": "3.3.2",
     "tailwindcss-fluid-type": "^2.0.3",
     "typescript": "5.0.4",
-    "user-agents": "^1.0.1365"
+    "user-agents": "^1.0.1370"
   }
 }
