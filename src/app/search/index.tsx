@@ -1,9 +1,20 @@
+import { numberFrmt } from '@/const/formatters';
+import supabase from '@/lib/supabase';
 import * as Dialog from '@/ui/dialog';
-import { SearchIcon } from 'lucide-react';
-import SearchContainer from './container';
-import SearchHero from './hero';
+import { ArrowRight, SearchIcon } from 'lucide-react';
+import SearchForm from './form';
+import SearchResults from './results';
 
-export default function Search() {
+async function getRootAndTopics() {
+  const root = await supabase.rpc('get_root_summary').single();
+  const topics = await supabase.rpc('get_random_topics', { amount: 5 });
+  if (root.error || topics.error) return { root: undefined, topics: undefined };
+  return { root: root.data, topics: topics.data };
+}
+
+export default async function Search() {
+  const { root, topics } = await getRootAndTopics();
+
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -15,10 +26,33 @@ export default function Search() {
         </button>
       </Dialog.Trigger>
       <Dialog.Content title="search posts">
-        <SearchContainer>
-          {/* @ts-expect-error Async Server Component */}
-          <SearchHero />
-        </SearchContainer>
+        <SearchForm />
+        <div className="my-4 flex-1 overflow-y-auto px-1">
+          <SearchResults>
+            <div className="mx-auto mt-10 flex max-w-max flex-col gap-2">
+              <span className="text-fancy -tracking-[0.1em] text-4xl">
+                feedjoy search
+              </span>
+              <p className="text-2 text-base [&>span]:text-1">
+                traverse <span>{numberFrmt.format(root?.totalposts ?? 0)}</span>{' '}
+                posts on <span>{numberFrmt.format(root?.totalsites ?? 0)}</span>{' '}
+                sites
+              </p>
+              <div className="mb-10 h-1 rounded bg-3" />
+              <div className="flex flex-col gap-1">
+                <p className="text-2">example searches</p>
+                <ul className="text-sm">
+                  {topics?.map((topic) => (
+                    <li key={topic.name} className="flex items-center gap-2">
+                      <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                      {topic.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </SearchResults>
+        </div>
       </Dialog.Content>
     </Dialog.Root>
   );
