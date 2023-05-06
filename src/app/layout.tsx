@@ -68,6 +68,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <li><NextAnchor href="/about">about</NextAnchor></li>
             </ul>
           </nav>
+          {/* @ts-expect-error Async Server Component */}
           <Search />
         </div>
         <main className="flex-1 pb-fluid-4 motion-safe:animate-fade-in">
