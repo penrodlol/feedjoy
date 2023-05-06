@@ -1,11 +1,10 @@
 import { Anchor, NextAnchor } from '@/ui/anchor';
-import Search from '@/ui/search';
-import SearchHero from '@/ui/search/search-hero';
 import { Home } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Kaisei_Tokumin, Taviraj } from 'next/font/google';
 import type { ReactNode } from 'react';
 import 'tailwindcss/tailwind.css';
+import Search from './search';
 
 const taviraj = Taviraj({
   weight: ['400', '700'],
@@ -57,7 +56,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className="!mx-auto flex min-h-screen max-w-screen-lg flex-col bg-1 px-fluid-4 
                    text-1 text-sm selection:bg-brand selection:text-black"
       >
-        <div className="mx-auto my-4 flex w-full items-center gap-fluid-3 rounded bg-2 px-4 py-2 shadow">
+        <div className="mx-auto my-4 flex w-full items-center gap-fluid-2 rounded bg-2 px-4 py-2 shadow">
           <NextAnchor href="/" className="mr-auto" aria-label="Home">
             <Home className="h-5 w-5" aria-hidden />
           </NextAnchor>
@@ -69,10 +68,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <li><NextAnchor href="/about">about</NextAnchor></li>
             </ul>
           </nav>
-          <Search>
-            {/* @ts-expect-error Async Server Component */}
-            <SearchHero />
-          </Search>
+          <Search />
         </div>
         <main className="flex-1 pb-fluid-4 motion-safe:animate-fade-in">
           {children}
