@@ -7,7 +7,7 @@ import { History, Library } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
-export const revalidate = 86400;
+export const revalidate = 28800;
 
 type Props = { params: { page: string } };
 

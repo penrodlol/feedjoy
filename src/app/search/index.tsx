@@ -5,7 +5,7 @@ import { ArrowRight, SearchIcon } from 'lucide-react';
 import SearchForm from './form';
 import SearchResults from './results';
 
-export const revalidate = 86400;
+export const revalidate = 28800;
 
 async function getRootAndTopics() {
   const root = await supabase.rpc('get_root_summary').single();

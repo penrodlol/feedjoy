@@ -4,7 +4,7 @@ import { NextAnchor } from '@/ui/anchor';
 import Card from '@/ui/card';
 import { ArrowRight, User } from 'lucide-react';
 
-export const revalidate = 86400;
+export const revalidate = 28800;
 
 async function getRoot() {
   const { data, error } = await supabase.rpc('get_root_summary').single();
