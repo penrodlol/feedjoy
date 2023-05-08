@@ -5,6 +5,7 @@ import Card from '@/ui/card';
 import { ArrowRight, User } from 'lucide-react';
 
 export const revalidate = 28800;
+export const runtime = 'edge';
 
 async function getRoot() {
   const { data, error } = await supabase.rpc('get_root_summary').single();
