@@ -20,7 +20,7 @@ export function Trigger({ children, ...props }: Radix.TabsTriggerProps) {
   return (
     <Radix.TabsTrigger
       {...props}
-      className="flex-1 rounded p-2 text-2 transition-colors hover:bg-2 
+      className="flex-1 rounded p-1 text-2 transition-colors hover:bg-2 
                  hover:text-1 data-[state='active']:bg-2 
                  data-[state='active']:text-1"
     >
