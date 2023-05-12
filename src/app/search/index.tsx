@@ -8,9 +8,8 @@ import SearchResults from './results';
 export const revalidate = 28800;
 
 async function getRootAndTopics() {
-  const root = await supabase.rpc('get_root_summary').single();
-  const topics = await supabase.rpc('get_random_topics', { amount: 5 });
-  if (root.error || topics.error) return { root: undefined, topics: undefined };
+  const root = await supabase.rpc('get_summary');
+  const topics = await supabase.rpc('get_random_topics');
   return { root: root.data, topics: topics.data };
 }
 

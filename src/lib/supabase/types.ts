@@ -101,9 +101,7 @@ export interface Database {
         }[];
       };
       get_random_topics: {
-        Args: {
-          amount: number;
-        };
+        Args: Record<PropertyKey, never>;
         Returns: {
           name: string;
         }[];
