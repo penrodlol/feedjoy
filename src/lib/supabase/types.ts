@@ -90,12 +90,6 @@ export interface Database {
         };
         Returns: undefined;
       };
-      bulk_update_summaries: {
-        Args: {
-          summaries: Json;
-        };
-        Returns: undefined;
-      };
       get_random_posts: {
         Args: Record<PropertyKey, never>;
         Returns: {
@@ -122,14 +116,6 @@ export interface Database {
           pub_date: string;
           siteslug: string;
           sitename: string;
-        }[];
-      };
-      get_root_summary: {
-        Args: Record<PropertyKey, never>;
-        Returns: {
-          totalposts: number;
-          totalsites: number;
-          postweek: number;
         }[];
       };
       get_sites_summary: {
