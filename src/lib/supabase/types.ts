@@ -96,12 +96,32 @@ export interface Database {
         };
         Returns: undefined;
       };
+      get_random_posts: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          slug: string;
+          title: string;
+          pub_date: string;
+          siteslug: string;
+          sitename: string;
+        }[];
+      };
       get_random_topics: {
         Args: {
           amount: number;
         };
         Returns: {
           name: string;
+        }[];
+      };
+      get_recent_posts: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          slug: string;
+          title: string;
+          pub_date: string;
+          siteslug: string;
+          sitename: string;
         }[];
       };
       get_root_summary: {
@@ -119,12 +139,20 @@ export interface Database {
           count: number;
         }[];
       };
+      get_summary: {
+        Args: Record<PropertyKey, never>;
+        Returns: Database['public']['CompositeTypes']['summary'];
+      };
     };
     Enums: {
       [_ in never]: never;
     };
     CompositeTypes: {
-      [_ in never]: never;
+      summary: {
+        totalposts: number;
+        totalsites: number;
+        postweek: number;
+      };
     };
   };
 }
