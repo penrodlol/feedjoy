@@ -1,0 +1,28 @@
+name: add
+
+on:
+  workflow_dispatch:
+    inputs:
+      site:
+        description: 'Site ID'
+        required: true
+
+jobs:
+  scheduled-job:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Fetch Posts/Summaries/Topics
+        run: npx ts-node .github/scripts/add.mts
