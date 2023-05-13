@@ -1,7 +1,7 @@
 name: Daily Job
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       min:
         description: 'Minimum date to fetch posts from'
