@@ -1,12 +1,12 @@
 name: Daily Job
-inputs:
-  min:
-    description: 'Minimum date to fetch posts from'
-    required: false
-    default: '2021-01-01'
 
 on:
   workflow_dispatch:
+  inputs:
+    min:
+      description: 'Minimum date to fetch posts from'
+      required: false
+      default: '2021-01-01'
   schedule:
     - cron: '0 0 * * *'
 
