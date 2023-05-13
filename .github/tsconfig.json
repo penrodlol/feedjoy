@@ -2,8 +2,9 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext"
+    "module": "esnext",
+    "allowImportingTsExtensions": true
   },
   "ts-node": { "esm": true },
-  "include": ["scripts/*.mts"]
+  "include": ["scripts/**/*.mts"]
 }

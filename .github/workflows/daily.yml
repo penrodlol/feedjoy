@@ -1,12 +1,7 @@
-name: Daily Job
+name: daily
 
 on:
   workflow_dispatch:
-    inputs:
-      min:
-        description: 'Minimum date to fetch posts from'
-        required: false
-        default: '2021-01-01'
   schedule:
     - cron: '0 0 * * *'
 
@@ -27,11 +22,5 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Test
-        run: npx ts-node .github/scripts/test.mts
-
-      # - name: Fetch Posts
-      #   run: npx ts-node .github/scripts/posts.mts
-
-      # - name: Fetch Summaries/Topics
-      #   run: npx ts-node .github/scripts/summaries-topics.mts
+      - name: Fetch Posts
+        run: npx ts-node .github/scripts/daily.mts
