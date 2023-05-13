@@ -1,16 +1,15 @@
 name: Daily Job
-
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
-
 inputs:
   min:
     description: 'Minimum date to fetch posts from'
     required: false
     type: string
     format: date-time
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   scheduled-job:
