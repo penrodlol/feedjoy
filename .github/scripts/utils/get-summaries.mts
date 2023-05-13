@@ -3,6 +3,7 @@ import { decode, encode } from 'gpt-3-encoder';
 import UserAgent from 'user-agents';
 import openai from '../libs/openai.mts';
 import supabase from '../libs/supabase.mts';
+import delay from './delay.mts';
 
 export type GetSummaries = Awaited<ReturnType<typeof getSummaries>>;
 
@@ -13,7 +14,9 @@ export default async function getSummaries() {
   const headers = { 'User-Agent': new UserAgent(/Chrome/).toString() };
 
   return Promise.all(
-    posts.data.map(async ({ id, link }) => {
+    posts.data.map(async ({ id, link }, index) => {
+      await delay(index);
+
       const $ = load(await fetch(link, { headers }).then((res) => res.text()));
       $('header, footer, aside, noscript').remove();
       const root = $('main').length > 0 ? $('main p') : $('body p');

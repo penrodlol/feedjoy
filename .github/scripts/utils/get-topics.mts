@@ -1,10 +1,13 @@
 import openai from '../libs/openai.mjs';
 import supabase from '../libs/supabase.mjs';
+import delay from './delay.mjs';
 import { type GetSummaries } from './get-summaries.mts';
 
 export default async function getTopics(summaries: GetSummaries) {
   await Promise.all(
-    summaries?.map(async (payload) => {
+    summaries.map(async (payload, index) => {
+      await delay(index);
+
       if (!payload?.id || !payload?.summary) return;
 
       const postsWithSummaries = await supabase
