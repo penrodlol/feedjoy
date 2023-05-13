@@ -3,8 +3,7 @@ inputs:
   min:
     description: 'Minimum date to fetch posts from'
     required: false
-    type: string
-    format: date-time
+    default: '2021-01-01'
 
 on:
   workflow_dispatch:
