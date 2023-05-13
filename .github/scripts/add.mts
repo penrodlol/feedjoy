@@ -8,7 +8,7 @@ const id = action.context.payload.inputs.site;
 const site = await supabase.from('site').select().eq('id', id).single();
 if (site.error) throw site.error;
 
-const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
-await getPosts([site.data], sixMonthsAgo);
+const oneYearAgo = new Date(Date.now() - 12 * 30 * 24 * 60 * 60 * 1000);
+await getPosts([site.data], oneYearAgo);
 const summaries = await getSummaries();
 await getTopics(summaries);
