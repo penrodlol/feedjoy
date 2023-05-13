@@ -1,6 +1,6 @@
-import github from '@actions/core';
+import github from '@actions/github';
 
-const min = github.getInput('min');
+const min = github.context.payload.inputs.min;
 console.log(min);
 console.log(min);
 console.log(min);
