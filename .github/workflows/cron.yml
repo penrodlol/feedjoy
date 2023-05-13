@@ -5,6 +5,13 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+inputs:
+  min:
+    description: 'Minimum date to fetch posts from'
+    required: false
+    type: string
+    format: date-time
+
 jobs:
   scheduled-job:
     runs-on: ubuntu-latest
@@ -22,8 +29,11 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Fetch Posts
-        run: npx ts-node .github/scripts/posts.mts
+      - name: Test
+        run: npx ts-node .github/scripts/test.mts
 
-      - name: Fetch Summaries/Topics
-        run: npx ts-node .github/scripts/summaries-topics.mts
+      # - name: Fetch Posts
+      #   run: npx ts-node .github/scripts/posts.mts
+
+      # - name: Fetch Summaries/Topics
+      #   run: npx ts-node .github/scripts/summaries-topics.mts
