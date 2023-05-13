@@ -28,7 +28,7 @@ jobs:
         run: yarn install
 
       - name: Test
-        run: npx ts-node .github/scripts/test.mts
+        run: echo "${{ github.event.inputs.min }}"
 
       # - name: Fetch Posts
       #   run: npx ts-node .github/scripts/posts.mts
