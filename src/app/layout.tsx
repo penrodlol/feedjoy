@@ -51,7 +51,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${taviraj.variable} ${kaisei.variable}`}>
+    <html
+      lang="en"
+      className={`ml-[calc(100vw-100%)] ${taviraj.variable} ${kaisei.variable}`}
+    >
       <body
         className="!mx-auto flex min-h-screen max-w-screen-lg flex-col bg-1 px-fluid-4 
                    text-1 text-sm selection:bg-brand selection:text-black"

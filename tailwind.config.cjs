@@ -40,11 +40,11 @@ module.exports = {
             height: `${theme('spacing.2')}`,
             '&-thumb': { backgroundColor: theme('backgroundColor.2') },
           },
-          '&:focus-visible': {
-            outline: `0.5px solid ${theme('colors.brand')}`,
-            borderRadius: theme('borderRadius.sm'),
-            outlineOffset: theme('outlineOffset.2'),
-          },
+        },
+        ':is(a, button, [tabindex="0"]):focus-visible': {
+          outline: `0.5px solid ${theme('colors.brand')}`,
+          borderRadius: theme('borderRadius.sm'),
+          outlineOffset: theme('outlineOffset.2'),
         },
       }),
   ],
