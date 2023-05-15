@@ -1,6 +1,6 @@
-import openai from '../libs/openai.mjs';
-import supabase from '../libs/supabase.mjs';
-import delay from './delay.mjs';
+import openai from '../libs/openai.mts';
+import supabase from '../libs/supabase.mts';
+import delay from './delay.mts';
 import { type GetSummaries } from './get-summaries.mts';
 
 export default async function getTopics(summaries: GetSummaries) {

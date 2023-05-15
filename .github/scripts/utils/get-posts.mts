@@ -1,6 +1,6 @@
 import Parser from 'rss-parser';
 import type { Site } from '../../../src/lib/supabase';
-import supabase from '../libs/supabase.mjs';
+import supabase from '../libs/supabase.mts';
 
 export default async function getPosts(sites: Array<Site>, min: Date) {
   const parser = new Parser();

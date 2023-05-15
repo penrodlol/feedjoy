@@ -1,7 +1,7 @@
-import supabase from './libs/supabase.mjs';
-import getPosts from './utils/get-posts.mjs';
-import getSummaries from './utils/get-summaries.mjs';
-import getTopics from './utils/get-topics.mjs';
+import supabase from './libs/supabase.mts';
+import getPosts from './utils/get-posts.mts';
+import getSummaries from './utils/get-summaries.mts';
+import getTopics from './utils/get-topics.mts';
 
 const sites = await supabase.from('site').select();
 if (sites.error) throw sites.error;

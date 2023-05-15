@@ -1,8 +1,8 @@
 import action from '@actions/github';
-import supabase from './libs/supabase.mjs';
-import getPosts from './utils/get-posts.mjs';
-import getSummaries from './utils/get-summaries.mjs';
-import getTopics from './utils/get-topics.mjs';
+import supabase from './libs/supabase.mts';
+import getPosts from './utils/get-posts.mts';
+import getSummaries from './utils/get-summaries.mts';
+import getTopics from './utils/get-topics.mts';
 
 const id = action.context.payload.inputs.site;
 const site = await supabase.from('site').select().eq('id', id).single();
