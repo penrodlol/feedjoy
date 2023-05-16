@@ -12,7 +12,7 @@ export async function searchPosts(payload: string) {
   const { data, error } = await supabase
     .from('post')
     .select('title, pub_date, slug, site(name, slug)')
-    .textSearch('title_topic_summary_fts', query.data)
+    .textSearch('title_topic_summary_fts', `'${query.data}'`)
     .order('pub_date', { ascending: false })
     .limit(30);
   if (error) return undefined;
