@@ -11,7 +11,6 @@ export interface Database {
     Tables: {
       post: {
         Row: {
-          fts: unknown | null;
           id: number;
           link: string;
           pub_date: string;
@@ -19,9 +18,10 @@ export interface Database {
           slug: string;
           summary: string | null;
           title: string;
+          title_topic_summary_fts: unknown | null;
+          topic: string | null;
         };
         Insert: {
-          fts?: unknown | null;
           id?: number;
           link: string;
           pub_date: string;
@@ -29,9 +29,10 @@ export interface Database {
           slug?: string;
           summary?: string | null;
           title: string;
+          title_topic_summary_fts?: unknown | null;
+          topic?: string | null;
         };
         Update: {
-          fts?: unknown | null;
           id?: number;
           link?: string;
           pub_date?: string;
@@ -39,6 +40,8 @@ export interface Database {
           slug?: string;
           summary?: string | null;
           title?: string;
+          title_topic_summary_fts?: unknown | null;
+          topic?: string | null;
         };
       };
       site: {
@@ -59,23 +62,6 @@ export interface Database {
           name?: string;
           slug?: string;
           url?: string;
-        };
-      };
-      topic: {
-        Row: {
-          id: number;
-          name: string;
-          post_id: number;
-        };
-        Insert: {
-          id?: number;
-          name: string;
-          post_id: number;
-        };
-        Update: {
-          id?: number;
-          name?: string;
-          post_id?: number;
         };
       };
     };

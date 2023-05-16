@@ -16,21 +16,22 @@ export default async function getTopics(summaries: GetSummaries) {
         .eq('id', payload.id);
       if (postsWithSummaries.error) throw postsWithSummaries.error;
 
-      const content = `Give me a list of 2 comma separated technical tools from this text:\n\n${payload.summary}`;
-      const topicsPayload = await openai.createChatCompletion({
+      const content =
+        'Give me a technical tool from this text (Only return the name of the tool. ' +
+        `Exclude version numbers.):\n\n${payload.summary}`;
+      const topicPayload = await openai.createChatCompletion({
         model: 'gpt-4',
         messages: [{ role: 'user', content }],
       });
 
-      const _topics =
-        topicsPayload.data.choices[0]?.message?.content?.split(',');
-      const topics = _topics?.map((topic) => topic.trim()).slice(0, 2);
-      if (topics?.length !== 2) return;
+      const _topic = topicPayload.data.choices[0]?.message?.content.trim();
+      if (!_topic?.length) return;
 
-      const postsWithTopics = await supabase
-        .from('topic')
-        .insert(topics.map((name) => ({ name, post_id: payload.id })));
-      if (postsWithTopics.error) throw postsWithTopics.error;
+      const postWithTopic = await supabase
+        .from('post')
+        .update({ topic: _topic })
+        .eq('id', payload.id);
+      if (postWithTopic.error) throw postWithTopic.error;
     }),
   );
 }
