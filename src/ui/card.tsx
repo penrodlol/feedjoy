@@ -9,8 +9,8 @@ export type RootElement = ComponentRef<'a'>;
 export type RootProps = LinkProps & ComponentPropsWithRef<'a'>;
 export type HeaderElement = ComponentRef<'div'>;
 export type HeaderProps = ComponentPropsWithRef<'div'>;
-export type ContentElement = ComponentRef<'div'>;
-export type ContentProps = ComponentPropsWithRef<'div'>;
+export type BodyElement = ComponentRef<'div'>;
+export type BodyProps = ComponentPropsWithRef<'div'>;
 
 export const Root = forwardRef<RootElement, RootProps>(({ className, children, ...props }, ref) => {
   return (
@@ -29,29 +29,22 @@ export const Root = forwardRef<RootElement, RootProps>(({ className, children, .
   );
 });
 
-export const Header = forwardRef<HeaderElement, HeaderProps>(({ className, ...props }, ref) => {
+export const Header = forwardRef<HeaderElement, HeaderProps>((props, ref) => {
   return (
-    <div
-      {...props}
-      ref={ref}
-      className={twMerge('!text-xxs flex items-center justify-between text-2', className)}
-    />
+    <div {...props} ref={ref} className="!text-xxs flex items-center justify-between text-2" />
   );
 });
 
-export const Content = forwardRef<ContentElement, ContentProps>(({ className, ...props }, ref) => {
+export const Body = forwardRef<BodyElement, BodyProps>((props, ref) => {
   return (
     <div
       {...props}
       ref={ref}
-      className={twMerge(
-        'group-hover:text-emphasis px-1 py-3 text-xs transition-colors',
-        className,
-      )}
+      className="group-hover:text-emphasis px-1 py-3 text-xs transition-colors"
     />
   );
 });
 
 Root.displayName = 'Root';
 Header.displayName = 'Header';
-Content.displayName = 'Content';
+Body.displayName = 'Body';
