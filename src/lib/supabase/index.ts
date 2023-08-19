@@ -8,4 +8,5 @@ export type Post = Database['public']['Tables']['post']['Row'];
 export default createClient<Database>(
   z.string().url().parse(process.env.SUPABASE_URL),
   z.string().parse(process.env.SUPABASE_ANON_KEY),
+  { auth: { persistSession: false } },
 );

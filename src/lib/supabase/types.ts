@@ -1,10 +1,4 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json }
-  | Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export interface Database {
   public: {
@@ -43,6 +37,14 @@ export interface Database {
           title_topic_summary_fts?: unknown | null;
           topic?: string | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'post_site_id_fkey';
+            columns: ['site_id'];
+            referencedRelation: 'site';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       site: {
         Row: {
@@ -63,6 +65,7 @@ export interface Database {
           slug?: string;
           url?: string;
         };
+        Relationships: [];
       };
     };
     Views: {
