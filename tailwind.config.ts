@@ -37,7 +37,7 @@ export default {
         '.text-fancy': {
           color: 'transparent',
           textShadow: '-1px -1px 0 hsla(0,0%,100%,.1), 1px 1px 0 rgba(0,0,0,.1)',
-          '-webkit-text-stroke': '0.9px #ffffff75',
+          '-webkit-text-stroke': '0.9px #ffffff95',
           '-webkit-text-fill-color': 'transparent',
         },
       });
