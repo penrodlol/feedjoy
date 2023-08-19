@@ -16,7 +16,7 @@ export default function Search({ post }: { post: string | undefined }) {
 
   const onSubmit = form.handleSubmit((data) => {
     if (post === data.post) return;
-    if (data.post === '') searchParams.remove('post', '/posts/page/1');
+    else if (data.post === '') searchParams.remove('post', '/posts/page/1');
     else searchParams.add('post', data.post, '/posts/page/1');
   });
 
@@ -32,7 +32,11 @@ export default function Search({ post }: { post: string | undefined }) {
           <SearchIcon size={12} aria-hidden />
         </TextField.Icon>
         <TextField.Input placeholder="search posts" {...form.register('post')} />
-        <TextField.Reset type="reset" onClick={onReset} />
+        <TextField.Reset
+          type="reset"
+          disabled={!post && !form.formState.isDirty}
+          onClick={onReset}
+        />
       </TextField.Root>
     </form>
   );

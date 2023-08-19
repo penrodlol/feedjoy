@@ -18,20 +18,12 @@ export function useSearchParams() {
   const remove = useCallback(
     (key: string, route: string) => {
       const params = new URLSearchParams(nextSearchParams.toString());
+      if (!params.has(key)) return;
       params.delete(key);
       router.push(`${route}?${params.toString()}`);
     },
     [nextSearchParams, router],
   );
 
-  const removeAll = useCallback(
-    (route: string) => {
-      const params = new URLSearchParams(nextSearchParams.toString());
-      params.forEach((_, key) => params.delete(key));
-      router.push(route);
-    },
-    [nextSearchParams, router],
-  );
-
-  return { add, remove, removeAll };
+  return { add, remove };
 }
