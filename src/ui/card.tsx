@@ -1,20 +1,57 @@
 'use client';
 
-import Link, { type LinkProps } from 'next/link';
+import type { LinkProps } from 'next/link';
+import Link from 'next/link';
+import { forwardRef, type ComponentPropsWithRef, type ComponentRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-type Props<T extends string> = LinkProps<T> & { title: string };
+export type RootElement = ComponentRef<'a'>;
+export type RootProps = LinkProps & ComponentPropsWithRef<'a'>;
+export type HeaderElement = ComponentRef<'div'>;
+export type HeaderProps = ComponentPropsWithRef<'div'>;
+export type ContentElement = ComponentRef<'div'>;
+export type ContentProps = ComponentPropsWithRef<'div'>;
 
-export default function Card<T extends string>(props: Props<T>) {
+export const Root = forwardRef<RootElement, RootProps>(({ className, children, ...props }, ref) => {
   return (
     <Link
       {...props}
-      className="group flex h-full flex-col gap-2 rounded bg-2 p-3 pb-4 shadow
-                 transition-colors duration-150 ease-in-out hover:bg-3 focus-visible:bg-3"
+      ref={ref}
+      className={twMerge(
+        'group relative block h-full rounded bg-1 p-px before:absolute before:content-[""]',
+        'before:inset-0 before:rounded before:bg-gradient before:transition-opacity',
+        'before:opacity-0 before:duration-150 hover:before:opacity-100',
+        className,
+      )}
     >
-      <div className="flex flex-wrap justify-between gap-x-4 gap-y-2 text-2 text-xs">
-        {props.children}
-      </div>
-      <p className="px-2">{props.title}</p>
+      <div className="relative z-30 h-full rounded bg-1 p-3">{children}</div>
     </Link>
   );
-}
+});
+
+export const Header = forwardRef<HeaderElement, HeaderProps>(({ className, ...props }, ref) => {
+  return (
+    <div
+      {...props}
+      ref={ref}
+      className={twMerge('!text-xxs flex items-center justify-between text-2', className)}
+    />
+  );
+});
+
+export const Content = forwardRef<ContentElement, ContentProps>(({ className, ...props }, ref) => {
+  return (
+    <div
+      {...props}
+      ref={ref}
+      className={twMerge(
+        'group-hover:text-emphasis px-1 py-3 text-xs transition-colors',
+        className,
+      )}
+    />
+  );
+});
+
+Root.displayName = 'Root';
+Header.displayName = 'Header';
+Content.displayName = 'Content';
