@@ -6,6 +6,8 @@ import Separator from '@/ui/separator';
 import { UserIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import Filter from './filter';
+import Search from './search';
 
 export const revalidate = 28800;
 
@@ -47,7 +49,11 @@ export default async function Page(props: { params: Params; searchParams: Search
         <p className="text-sm text-2">Lorem, ipsum dolor sit amet consectetur dolor</p>
       </section>
       <Separator />
-      <section></section>
+      <section className="flex justify-between gap-6 text-xs [&_form]:flex-1">
+        <Filter site={searchParams.data.site} sites={data.sites} />
+        <Separator orientation="vertical" className="h-auto" />
+        <Search post={searchParams.data.post} />
+      </section>
       <Separator />
       <section>
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -62,7 +68,7 @@ export default async function Page(props: { params: Params; searchParams: Search
                     {formatDate(post.pub_date)}
                   </time>
                 </Card.Header>
-                <Card.Content>{post.title}</Card.Content>
+                <Card.Body>{post.title}</Card.Body>
               </Card.Root>
             </li>
           ))}
