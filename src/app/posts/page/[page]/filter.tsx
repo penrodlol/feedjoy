@@ -15,15 +15,18 @@ export default function Filter({ site, sites }: Props) {
   const [selected, setSelected] = useState(site);
 
   const onSelect = (site: string) => {
-    setOpen(false);
-
-    if (site === selected) {
-      setSelected(undefined);
-      searchParams.remove('site', '/posts/page/1');
-    } else {
+    if (site === selected) onClear();
+    else {
+      setOpen(false);
       setSelected(site);
       searchParams.add('site', site, '/posts/page/1');
     }
+  };
+
+  const onClear = () => {
+    setOpen(false);
+    setSelected(undefined);
+    searchParams.remove('site', '/posts/page/1');
   };
 
   return (
@@ -44,6 +47,9 @@ export default function Filter({ site, sites }: Props) {
               </Command.Item>
             ))}
           </Command.List>
+          <Button disabled={!selected} onClick={onClear}>
+            clear
+          </Button>
         </Command.Root>
       </Popover.Content>
     </Popover.Root>

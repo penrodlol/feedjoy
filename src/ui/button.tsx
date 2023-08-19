@@ -12,8 +12,9 @@ const Button = forwardRef<ButtonElement, ButtonProps>(({ className, type, ...pro
     ref={ref}
     type={type ?? 'button'}
     className={twMerge(
-      'flex items-center gap-2 rounded border bg-1 px-3 py-1',
-      'transition-colors hover:bg-2/60 focus:outline-none',
+      'flex items-center justify-center gap-2 rounded border bg-1 px-3 py-1',
+      'transition-colors hover:bg-2/60 focus:outline-none disabled:opacity-60',
+      'disabled:pointer-events-none',
       className,
     )}
   />
