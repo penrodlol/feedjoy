@@ -2,8 +2,10 @@ import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import type { Database } from './types';
 
-export type Site = Database['public']['Tables']['site']['Row'];
-export type Post = Database['public']['Tables']['post']['Row'];
+type Public = Database['public'];
+
+export type Tables<T extends keyof Public['Tables']> = Public['Tables'][T]['Row'];
+export type Functions<T extends keyof Public['Functions']> = Public['Functions'][T]['Returns'];
 
 export default createClient<Database>(
   z.string().url().parse(process.env.SUPABASE_URL),
