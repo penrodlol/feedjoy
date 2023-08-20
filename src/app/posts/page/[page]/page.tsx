@@ -7,24 +7,27 @@ import { UserIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import Filter from './filter';
+import { Paginator } from './paginator';
 import Search from './search';
 
 export const revalidate = 28800;
 
 async function getData(page: number, post?: string, site?: string) {
-  let query = supabase.from('post').select('slug, title, pub_date, site!inner(id, slug, name)');
+  let query = supabase
+    .from('post')
+    .select('slug, title, pub_date, site!inner(id, slug, name)', { count: 'exact' });
   if (site) query = query.like('site.name', site);
   if (post) query = query.textSearch('title_topic_summary_fts', `'${post}'`);
 
   const posts = await query
     .order('pub_date', { ascending: false })
     .range((page - 1) * 30, (page - 1) * 30 + 29);
-  if (posts.error) return undefined;
+  if (posts.error || !posts.count) return undefined;
 
   const sites = await supabase.from('site').select('name').order('name');
   if (sites.error) return undefined;
 
-  return { posts: posts.data, sites: sites.data.map((site) => site.name) };
+  return { posts: posts.data, postsTotal: posts.count, sites: sites.data.map((site) => site.name) };
 }
 
 type Params = { page: string };
@@ -55,7 +58,7 @@ export default async function Page(props: { params: Params; searchParams: Search
         <Search post={searchParams.data.post} />
       </section>
       <Separator />
-      <section>
+      <section className="flex flex-col gap-10">
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {data.posts.map((post) => (
             <li key={post.slug}>
@@ -73,6 +76,9 @@ export default async function Page(props: { params: Params; searchParams: Search
             </li>
           ))}
         </ul>
+        <div className="self-end">
+          <Paginator page={params.data.page} total={data.postsTotal} />
+        </div>
       </section>
     </div>
   );
