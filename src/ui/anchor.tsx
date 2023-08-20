@@ -1,13 +1,18 @@
 'use client';
 
 import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 import { forwardRef, type ComponentPropsWithRef, type ComponentRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export type AnchorElement = ComponentRef<'a'>;
 export type AnchorProps = ComponentPropsWithRef<'a'>;
+export type NextAnchorElement = ComponentRef<typeof Link>;
+export type NextAnchorProps = ComponentPropsWithRef<typeof Link>;
 
-const Anchor = forwardRef<AnchorElement, AnchorProps>(
+const baseClassName = 'hover:text-emphasis motion-safe:transition-colors';
+
+export const Anchor = forwardRef<AnchorElement, AnchorProps>(
   ({ className, children, target, rel, ...props }: AnchorProps, ref) => (
     <a
       {...props}
@@ -15,7 +20,7 @@ const Anchor = forwardRef<AnchorElement, AnchorProps>(
       target={target ?? '_blank'}
       rel={rel ?? 'nofollow noopener noreferrer'}
       className={twMerge(
-        'hover:text-emphasis flex items-center gap-1 motion-safe:transition-colors',
+        'flex items-center gap-1 hover:text-emphasis motion-safe:transition-colors',
         className,
       )}
     >
@@ -24,5 +29,11 @@ const Anchor = forwardRef<AnchorElement, AnchorProps>(
   ),
 );
 
+export const NextAnchor = forwardRef<NextAnchorElement, NextAnchorProps>(
+  ({ className, ...props }: NextAnchorProps, ref) => (
+    <Link {...props} ref={ref} className={twMerge(baseClassName, className)} />
+  ),
+);
+
 Anchor.displayName = 'Anchor';
-export default Anchor;
+NextAnchor.displayName = Link.displayName;

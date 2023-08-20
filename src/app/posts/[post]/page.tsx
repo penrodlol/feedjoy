@@ -1,7 +1,7 @@
 import { formatDate } from '@/lib/formatter';
 import { slugSchema } from '@/lib/schema';
 import supabase from '@/lib/supabase';
-import Anchor from '@/ui/anchor';
+import { Anchor } from '@/ui/anchor';
 import Separator from '@/ui/separator';
 import { CalendarIcon, UserIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
@@ -28,7 +28,7 @@ export default async function Page(props: { params: { post: string } }) {
   return (
     <div className="mx-auto mt-fluid-3 flex max-w-screen-md flex-col gap-fluid-3">
       <section className="flex flex-col gap-3">
-        <div className="!text-xxs max-w-max rounded-lg bg-2/80 px-2 py-0.5">{post.topic}</div>
+        <div className="max-w-max rounded-lg bg-2/80 px-2 py-0.5 !text-xxs">{post.topic}</div>
         <h1 className="text-xl uppercase tracking-widest text-fancy">{post.title}</h1>
         <div className="mt-3 flex flex-wrap gap-12 text-sm">
           <div className="flex items-center gap-2">

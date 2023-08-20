@@ -1,6 +1,6 @@
+import { NextAnchor } from '@/ui/anchor';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { twJoin } from 'tailwind-merge';
 import 'tailwindcss/tailwind.css';
@@ -43,8 +43,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <nav>
                 {/* prettier-ignore */}
                 <ul className="flex gap-8 text-xs">
-                  <li><Link href="/posts/page/1">posts</Link></li>
-                  <li><Link href="/about">about</Link></li>
+                  <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
+                  <li><NextAnchor href="/about">about</NextAnchor></li>
                 </ul>
               </nav>
             </div>
