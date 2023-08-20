@@ -38,13 +38,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="m-4 mx-auto max-w-screen-xl rounded bg-gradient p-px">
         <div className="flex min-h-screen flex-col rounded bg-black text-base antialiased">
           <header className="flex flex-col gap-3 p-3">
-            <div className="flex justify-between px-8">
-              <span></span>
+            <div className="flex justify-between px-8 text-xs">
+              <NextAnchor href="/" />
               <nav>
                 {/* prettier-ignore */}
-                <ul className="flex gap-8 text-xs">
-                  <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
-                  <li><NextAnchor href="/about">about</NextAnchor></li>
+                <ul className="flex gap-4">
+                  <li><NextAnchor href="/posts/page/1" className='px-2 py-1'>posts</NextAnchor></li>
+                  <li><NextAnchor href="/about" className='px-2 py-1'>about</NextAnchor></li>
                 </ul>
               </nav>
             </div>

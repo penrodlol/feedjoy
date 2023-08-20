@@ -47,7 +47,7 @@ export default async function Page(props: { params: Params; searchParams: Search
 
   return (
     <div className="mx-auto mt-fluid-3 flex max-w-screen-lg flex-col gap-fluid-3">
-      <section className="flex flex-col">
+      <section>
         <h1 className="text-5xl uppercase tracking-widest text-fancy">all posts</h1>
         <p className="text-sm text-2">Lorem, ipsum dolor sit amet consectetur dolor</p>
       </section>
