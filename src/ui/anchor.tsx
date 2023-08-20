@@ -30,7 +30,7 @@ export const Anchor = forwardRef<AnchorElement, AnchorProps>(
 );
 
 export const NextAnchor = forwardRef<NextAnchorElement, NextAnchorProps>(
-  ({ className, ...props }: NextAnchorProps, ref) => (
+  ({ className, ...props }, ref) => (
     <Link {...props} ref={ref} className={twMerge(baseClassName, className)} />
   ),
 );
