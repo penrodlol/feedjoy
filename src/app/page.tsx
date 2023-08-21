@@ -5,6 +5,7 @@ import Button from '@/ui/button';
 import * as Card from '@/ui/card';
 import Separator from '@/ui/separator';
 import { ArrowRightIcon, UserIcon } from 'lucide-react';
+import Link from 'next/link';
 import Summary from './summary';
 import Topics from './topics';
 
@@ -34,14 +35,16 @@ export default async function Home() {
     <div className="mx-auto mt-fluid-6 flex max-w-screen-lg flex-col gap-fluid-4">
       <section>
         <h1 className="text-8xl tracking-widest text-fancy">FEEDJOY</h1>
-        <h2 className="mb-4 text-lg tracking-wider text-2">a minimal RSS feed aggregator</h2>
-        <p className="max-w-prose text-xs leading-8 text-2">
+        <h2 className="text-lg tracking-wider text-2">a minimal RSS feed aggregator</h2>
+        <p className="mb-8 mt-4 max-w-prose text-xs leading-8 text-2">
           feedjoy aggregates blog posts from multiple RSS feeds into a single source. Its goal is to
           provide a more efficient way of tracking new posts without having to subscribe to multiple
           newsletters.
         </p>
-        <Button className="mt-8 text-sm">
-          explore posts <ArrowRightIcon size={14} aria-hidden />
+        <Button asChild>
+          <Link href="/posts/page/1" className="text-sm">
+            explore posts <ArrowRightIcon size={14} aria-hidden />
+          </Link>
         </Button>
       </section>
       <Separator />
