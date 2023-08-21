@@ -10,7 +10,8 @@ export type AnchorProps = ComponentPropsWithRef<'a'>;
 export type NextAnchorElement = ComponentRef<typeof Link>;
 export type NextAnchorProps = ComponentPropsWithRef<typeof Link>;
 
-const baseClassName = 'flex items-center gap-1 hover:text-emphasis motion-safe:transition-colors';
+const baseClassName =
+  'inline-flex items-center gap-1 hover:text-emphasis motion-safe:transition-colors';
 
 export const Anchor = forwardRef<AnchorElement, AnchorProps>(
   ({ className, children, target, rel, ...props }: AnchorProps, ref) => (
