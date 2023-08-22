@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={twJoin(inter.variable, 'ml-[calc(100vw-100%)] bg-1 bg-grid text-1')}>
       <body className="m-4 mx-auto max-w-screen-xl rounded bg-gradient p-px">
-        <div className="flex min-h-screen flex-col rounded bg-black text-base antialiased">
+        <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black text-base antialiased">
           <header className="flex flex-col gap-3 p-3">
             <div className="flex justify-between px-8 text-xs">
               <NextAnchor href="/" />
