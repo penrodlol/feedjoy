@@ -1,4 +1,6 @@
-import { NextAnchor } from '@/ui/anchor';
+import { Anchor, NextAnchor } from '@/ui/anchor';
+import Separator from '@/ui/separator';
+import { GithubIcon } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
@@ -49,9 +51,28 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </nav>
             </div>
           </header>
-          <main className="mb-10 flex-1">{children}</main>
-          <footer className="p-3">
-            <div className="px-8"></div>
+          <main className="mb-16 flex-1">{children}</main>
+          <footer className="mx-auto w-full max-w-screen-lg">
+            <Separator />
+            <div className="flex items-center justify-between px-2 py-4 text-xxs text-2">
+              <p>©{new Date().getFullYear()} Christian Penrod - All Rights Reserved</p>
+              <div className="flex items-center gap-5">
+                <nav>
+                  {/* prettier-ignore */}
+                  <ul className="flex gap-3">
+                    <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
+                    <li><NextAnchor href="/about">about</NextAnchor></li>
+                  </ul>
+                </nav>
+                <Separator orientation="vertical" className="h-5" />
+                <Anchor
+                  href="https://github.com/penrodlol/feedjoy"
+                  className="rounded border bg-1 p-1 [&_.lucide-arrow-up-right]:hidden"
+                >
+                  <GithubIcon size={14} aria-label="github" />
+                </Anchor>
+              </div>
+            </div>
           </footer>
         </div>
       </body>
