@@ -5,6 +5,7 @@ import type { Database } from './types';
 type Public = Database['public'];
 
 export type Tables<T extends keyof Public['Tables']> = Public['Tables'][T]['Row'];
+export type Enums<T extends keyof Public['Enums']> = Public['Enums'][T];
 export type Functions<T extends keyof Public['Functions']> = Public['Functions'][T]['Returns'];
 
 export default createClient<Database>(

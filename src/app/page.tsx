@@ -1,21 +1,20 @@
 import { formatDate } from '@/lib/formatter';
-import supabase from '@/lib/supabase';
+import supabase, { type Enums } from '@/lib/supabase';
 import { NextAnchor } from '@/ui/anchor';
 import Button from '@/ui/button';
 import * as Card from '@/ui/card';
 import Separator from '@/ui/separator';
-import { ArrowRightIcon, UserIcon } from 'lucide-react';
+import * as Tabs from '@/ui/tabs';
+import { ActivityIcon, ArrowRightIcon, UserIcon } from 'lucide-react';
 import Link from 'next/link';
-import Summary from './summary';
-import Topics from './topics';
 
 export const revalidate = 28800;
 
 async function getData() {
-  const summary = await supabase.rpc('get_summary');
-  if (summary.error) return undefined;
+  const totals = await supabase.rpc('summary_totals_ordered').select('type, total, updated_at');
+  if (totals.error) return undefined;
 
-  const topics = await supabase.rpc('get_top_topics', { pub_date_limit: '1 year' });
+  const topics = await supabase.rpc('summary_topics_ordered').select('type, items');
   if (topics.error) return undefined;
 
   const recentPosts = await supabase
@@ -25,7 +24,7 @@ async function getData() {
     .limit(8);
   if (recentPosts.error) return undefined;
 
-  return { summary: summary.data, topics: topics.data, recentPosts: recentPosts.data };
+  return { summary: { totals: totals.data, topics: topics.data }, recentPosts: recentPosts.data };
 }
 
 export default async function Home() {
@@ -51,11 +50,53 @@ export default async function Home() {
       <section className="grid grid-cols-2 gap-20">
         <div className="flex flex-col gap-4">
           <h3 className="leading-none tracking-wider text-2">SUMMARY</h3>
-          <Summary summary={data?.summary} />
+          <ul className="flex flex-col gap-4">
+            {data?.summary.totals.map(({ type, total, updated_at }) => (
+              <li key={type} className="rounded bg-gradient p-px">
+                <div className="flex flex-col rounded bg-black px-5 py-2.5">
+                  <div className="flex justify-between">
+                    <span className="mb-1 text-xs">{type}</span>
+                    <ActivityIcon size={16} className="text-2" aria-hidden />
+                  </div>
+                  <strong>{total}</strong>
+                  <em className="flex gap-1 text-xxs text-2">
+                    <span>last updated:</span>
+                    <time dateTime={updated_at}>{formatDate(updated_at)}</time>
+                  </em>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="flex flex-col gap-4">
           <h3 className="leading-none tracking-wider text-2">POPULAR TOPICS</h3>
-          <Topics topics={data?.topics} />
+          <Tabs.Root defaultValue={'all time' satisfies Enums<'summary_topic_type'>}>
+            <Tabs.List className="text-xs">
+              {data?.summary.topics.map(({ type }) => (
+                <Tabs.Trigger key={type} value={type}>
+                  {type}
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+            {data?.summary.topics.map(({ type, items }) => (
+              <Tabs.Content key={type} value={type}>
+                <ul className="flex flex-col gap-1 text-xs">
+                  {items.map(({ topic, total }, index) => (
+                    <li key={topic} className="flex flex-col gap-1">
+                      <div className="flex justify-between">
+                        <span>{topic}</span>
+                        <p className="flex items-center gap-1">
+                          <strong>{total}</strong>
+                          <span className="text-2">posts</span>
+                        </p>
+                      </div>
+                      {index !== 7 && <Separator />}
+                    </li>
+                  ))}
+                </ul>
+              </Tabs.Content>
+            ))}
+          </Tabs.Root>
         </div>
       </section>
       <Separator />
@@ -79,8 +120,7 @@ export default async function Home() {
           ))}
         </ul>
         <NextAnchor href="/posts/page/1" className="mt-4 self-end text-xs">
-          view all posts
-          <ArrowRightIcon size={14} aria-hidden />
+          view all posts <ArrowRightIcon size={14} aria-hidden />
         </NextAnchor>
       </section>
     </div>
