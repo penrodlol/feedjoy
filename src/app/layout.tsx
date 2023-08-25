@@ -36,44 +36,46 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={twJoin(inter.variable, 'ml-[calc(100vw-100%)] bg-1 bg-grid text-1')}>
-      <body className="m-4 mx-auto max-w-screen-xl rounded bg-gradient p-px">
-        <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black text-base antialiased">
-          <header className="flex flex-col gap-3 p-3">
-            <div className="flex justify-between px-8 text-xs">
-              <NextAnchor href="/" />
-              <nav>
-                {/* prettier-ignore */}
-                <ul className="flex gap-4">
-                  <li><NextAnchor href="/posts/page/1" className='px-2 py-1'>posts</NextAnchor></li>
-                  <li><NextAnchor href="/about" className='px-2 py-1'>about</NextAnchor></li>
-                </ul>
-              </nav>
-            </div>
-          </header>
-          <main className="mb-16 flex-1">{children}</main>
-          <footer className="mx-auto w-full max-w-screen-lg">
-            <Separator />
-            <div className="flex items-center justify-between px-2 py-4 text-xxs text-2">
-              <p>©{new Date().getFullYear()} Christian Penrod - All Rights Reserved</p>
-              <div className="flex items-center gap-5">
+    <html lang="en" className={twJoin(inter.variable, 'ml-[calc(100vw-100%)] bg-1 bg-grid')}>
+      <body className="mx-4 my-4 text-base text-1 antialiased">
+        <div className="mx-auto max-w-screen-xl rounded bg-gradient p-px">
+          <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black px-6 py-1">
+            <header className="flex flex-col gap-3 p-3">
+              <div className="flex justify-between text-xs">
+                <NextAnchor href="/" />
                 <nav>
                   {/* prettier-ignore */}
-                  <ul className="flex gap-3">
+                  <ul className="flex gap-6">
+                  <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
+                  <li><NextAnchor href="/about">about</NextAnchor></li>
+                </ul>
+                </nav>
+              </div>
+            </header>
+            <main className="mb-16 flex-1">{children}</main>
+            <footer className="mx-auto w-full max-w-screen-lg">
+              <Separator />
+              <div className="flex items-center justify-between px-2 py-4 text-xxs text-2">
+                <p>©{new Date().getFullYear()} Christian Penrod - All Rights Reserved</p>
+                <div className="flex items-center gap-5">
+                  <nav>
+                    {/* prettier-ignore */}
+                    <ul className="flex gap-3">
                     <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
                     <li><NextAnchor href="/about">about</NextAnchor></li>
                   </ul>
-                </nav>
-                <Separator orientation="vertical" className="h-5" />
-                <Anchor
-                  href="https://github.com/penrodlol/feedjoy"
-                  className="rounded border bg-1 p-1 [&_.lucide-arrow-up-right]:hidden"
-                >
-                  <GithubIcon size={14} aria-label="github" />
-                </Anchor>
+                  </nav>
+                  <Separator orientation="vertical" className="h-5" />
+                  <Anchor
+                    href="https://github.com/penrodlol/feedjoy"
+                    className="rounded border bg-1 p-1 [&_[data-external-icon]]:hidden"
+                  >
+                    <GithubIcon size={14} aria-label="github" />
+                  </Anchor>
+                </div>
               </div>
-            </div>
-          </footer>
+            </footer>
+          </div>
         </div>
       </body>
     </html>

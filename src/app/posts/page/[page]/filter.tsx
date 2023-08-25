@@ -32,7 +32,7 @@ export default function Filter({ site, sites }: Props) {
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
-        <Button className="w-52 justify-between" role="combobox" aria-expanded={open}>
+        <Button className="justify-between sm:w-52" role="combobox" aria-expanded={open}>
           {selected ?? 'filter by site'}
           <FilterIcon size={14} aria-hidden />
         </Button>

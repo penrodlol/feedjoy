@@ -52,9 +52,9 @@ export default async function Page(props: { params: Params; searchParams: Search
         <p className="text-sm text-2">Lorem, ipsum dolor sit amet consectetur dolor</p>
       </section>
       <Separator />
-      <section className="flex justify-between gap-6 text-xs [&_form]:flex-1">
+      <section className="flex flex-col-reverse justify-between gap-x-6 gap-y-4 text-xs sm:flex-row [&_form]:flex-1">
         <Filter site={searchParams.data.site} sites={data.sites} />
-        <Separator orientation="vertical" className="h-auto" />
+        <Separator orientation="vertical" className="hidden h-auto sm:block" />
         <Search post={searchParams.data.post} />
       </section>
       <Separator />

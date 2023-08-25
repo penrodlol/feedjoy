@@ -47,7 +47,7 @@ export default async function Home() {
         </Button>
       </section>
       <Separator />
-      <section className="grid grid-cols-2 gap-20">
+      <section className="grid gap-x-fluid-5 gap-y-10 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <h3 className="leading-none tracking-wider text-2">SUMMARY</h3>
           <ul className="flex flex-col gap-4">
@@ -102,7 +102,7 @@ export default async function Home() {
       <Separator />
       <section className="flex flex-col gap-6">
         <h3 className="text-lg tracking-wider text-2">RECENT POSTS</h3>
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <ul className="grid gap-6 md:grid-cols-2">
           {data?.recentPosts?.map((post) => (
             <li key={post.slug}>
               <Card.Root href={`/posts/${post.slug}`}>

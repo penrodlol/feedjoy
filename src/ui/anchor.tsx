@@ -22,7 +22,7 @@ export const Anchor = forwardRef<AnchorElement, AnchorProps>(
       rel={rel ?? 'nofollow noopener noreferrer'}
       className={twMerge(baseClassName, className)}
     >
-      {children} <ArrowUpRight size={14} aria-hidden />
+      {children} <ArrowUpRight size={14} data-external-icon aria-hidden />
     </a>
   ),
 );
