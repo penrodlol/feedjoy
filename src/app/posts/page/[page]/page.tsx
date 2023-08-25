@@ -49,7 +49,7 @@ export default async function Page(props: { params: Params; searchParams: Search
     <div className="mx-auto mt-fluid-3 flex max-w-screen-lg flex-col gap-fluid-3">
       <section>
         <h1 className="text-5xl uppercase tracking-widest text-fancy">all posts</h1>
-        <p className="text-sm text-2">Lorem, ipsum dolor sit amet consectetur dolor</p>
+        <p className="text-sm text-2">explore posts aggregated from multiple sites</p>
       </section>
       <Separator />
       <section className="flex flex-col-reverse justify-between gap-x-6 gap-y-4 text-xs sm:flex-row [&_form]:flex-1">

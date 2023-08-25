@@ -37,8 +37,8 @@ export default async function Home() {
         <h2 className="text-lg tracking-wider text-2">a minimal RSS feed aggregator</h2>
         <p className="mb-8 mt-4 max-w-prose text-xs leading-8 text-2">
           feedjoy aggregates blog posts from multiple RSS feeds into a single source. Its goal is to
-          provide a more efficient way of tracking new posts without having to subscribe to multiple
-          newsletters.
+          provide a more efficient way of tracking new posts without needing to subscribe to
+          multiple newsletters.
         </p>
         <Button asChild>
           <Link href="/posts/page/1" className="text-sm">
