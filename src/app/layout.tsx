@@ -1,6 +1,6 @@
 import { Anchor, NextAnchor } from '@/ui/anchor';
 import Separator from '@/ui/separator';
-import { GithubIcon } from 'lucide-react';
+import { GithubIcon, HomeIcon } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
@@ -42,7 +42,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black px-6 py-1">
             <header className="flex flex-col gap-3 p-3">
               <div className="flex justify-between text-xs">
-                <NextAnchor href="/" />
+                <NextAnchor href="/" aria-label="home" className="rounded border bg-1 p-1 text-2">
+                  <HomeIcon size={16} aria-hidden />
+                </NextAnchor>
                 <nav>
                   {/* prettier-ignore */}
                   <ul className="flex gap-6">
