@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="m-4 text-base">
         <div className="mx-auto max-w-screen-xl rounded bg-gradient p-px">
           <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black px-6 py-1">
-            <header className="flex flex-col gap-3 p-3">
+            <header className="flex flex-col gap-3 py-3 sm:px-3">
               <div className="flex justify-between text-xs">
                 <NextAnchor href="/" aria-label="home" className="rounded border bg-1 p-1 text-2">
                   <HomeIcon size={16} aria-hidden />
