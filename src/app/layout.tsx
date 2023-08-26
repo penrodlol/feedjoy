@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 </nav>
               </div>
             </header>
-            <main className="mb-16 flex-1">{children}</main>
+            <main className="mb-fluid-6 flex-1">{children}</main>
             <footer className="mx-auto w-full max-w-screen-lg">
               <Separator />
               <div className="flex flex-col-reverse gap-4 px-2 py-4 text-xxs text-2 sm:flex-row sm:items-center sm:justify-between">
