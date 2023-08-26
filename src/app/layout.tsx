@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={twJoin(inter.variable, 'ml-[calc(100vw-100%)] bg-1 bg-grid')}>
-      <body className="mx-4 my-4 text-base text-1 antialiased">
+      <body className="m-4 text-base text-1 antialiased">
         <div className="mx-auto max-w-screen-xl rounded bg-gradient p-px">
           <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black px-6 py-1">
             <header className="flex flex-col gap-3 p-3">
@@ -57,22 +57,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <main className="mb-16 flex-1">{children}</main>
             <footer className="mx-auto w-full max-w-screen-lg">
               <Separator />
-              <div className="flex items-center justify-between px-2 py-4 text-xxs text-2">
+              <div className="flex flex-col-reverse gap-4 px-2 py-4 text-xxs text-2 sm:flex-row sm:items-center sm:justify-between">
                 <p>©{new Date().getFullYear()} Christian Penrod - All Rights Reserved</p>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center justify-between gap-5">
                   <nav>
                     {/* prettier-ignore */}
                     <ul className="flex gap-3">
-                    <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
-                    <li><NextAnchor href="/about">about</NextAnchor></li>
-                  </ul>
+                      <li><NextAnchor href="/">home</NextAnchor></li>
+                      <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
+                      <li><NextAnchor href="/about">about</NextAnchor></li>
+                    </ul>
                   </nav>
-                  <Separator orientation="vertical" className="h-5" />
+                  <Separator orientation="vertical" className="hidden h-5 sm:block" />
                   <Anchor
                     href="https://github.com/penrodlol/feedjoy"
+                    aria-label="github"
                     className="rounded border bg-1 p-1 [&_[data-external-icon]]:hidden"
                   >
-                    <GithubIcon size={14} aria-label="github" />
+                    <GithubIcon size={14} aria-hidden />
                   </Anchor>
                 </div>
               </div>
