@@ -33,11 +33,10 @@ export default function Filter({ site, sites }: Props) {
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <Button className="justify-between sm:w-52" role="combobox" aria-expanded={open}>
-          {selected ?? 'filter by site'}
-          <FilterIcon size={14} aria-hidden />
+          {selected ?? 'filter by site'} <FilterIcon size={14} aria-hidden />
         </Button>
       </Popover.Trigger>
-      <Popover.Content>
+      <Popover.Content onOpenAutoFocus={(e) => e.preventDefault()}>
         <Command.Root>
           <Command.Input placeholder="search sites" />
           <Command.List>
