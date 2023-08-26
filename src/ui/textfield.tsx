@@ -47,8 +47,8 @@ export const Input = forwardRef<InputElement, InputProps>(
         autoComplete={autoComplete ?? 'off'}
         className={twMerge(
           'relative z-20 flex-1 shrink-0 rounded bg-transparent px-3 py-1',
-          'placeholder:text-2/80 focus:outline-none focus-visible:ring',
-          'disabled:opacity-40 peer-data-[icon=true]:pl-7',
+          'placeholder:text-2/80 focus-visible:outline-none focus-visible:ring-1',
+          'peer-data-[icon=true]:pl-7 disabled:opacity-40',
           className,
         )}
         {...props}
@@ -63,7 +63,8 @@ export const Reset = forwardRef<ResetElement, ResetProps>(({ className, ...props
       ref={ref}
       className={twMerge(
         'shrink-0 rounded border-l bg-2/60 px-2 transition-colors hover:bg-2',
-        'focus:outline-none disabled:pointer-events-none disabled:opacity-40',
+        'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-2',
+        'disabled:pointer-events-none disabled:opacity-40',
         className,
       )}
       {...props}

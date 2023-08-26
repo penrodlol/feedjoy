@@ -20,7 +20,8 @@ export const Root = forwardRef<RootElement, RootProps>(({ className, children, .
       className={twMerge(
         'group relative block h-full rounded bg-1 p-px before:absolute before:content-[""]',
         'before:inset-0 before:rounded before:bg-gradient before:transition-opacity',
-        'before:opacity-0 before:duration-150 hover:before:opacity-100',
+        'before:opacity-0 before:duration-150 hover:before:opacity-100 focus-visible:outline-none',
+        'focus-visible:ring-1 focus-visible:ring-offset-2',
         className,
       )}
     >
@@ -31,7 +32,7 @@ export const Root = forwardRef<RootElement, RootProps>(({ className, children, .
 
 export const Header = forwardRef<HeaderElement, HeaderProps>((props, ref) => {
   return (
-    <div {...props} ref={ref} className="!text-xxs flex items-center justify-between text-2" />
+    <div {...props} ref={ref} className="flex items-center justify-between !text-xxs text-2" />
   );
 });
 
@@ -40,7 +41,7 @@ export const Body = forwardRef<BodyElement, BodyProps>((props, ref) => {
     <div
       {...props}
       ref={ref}
-      className="group-hover:text-emphasis px-1 py-3 text-xs transition-colors"
+      className="px-1 py-3 text-xs transition-colors group-hover:text-emphasis"
     />
   );
 });

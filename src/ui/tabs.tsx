@@ -34,14 +34,23 @@ export const Trigger = forwardRef<TriggerElement, TriggerProps>(({ className, ..
     className={twMerge(
       'flex-1 select-none rounded border p-0.5 transition-colors hover:text-emphasis',
       'data-[state="inactive"]:border-transparent data-[state="active"]:bg-1',
-      'data-[state="active"]:text-emphasis',
+      'data-[state="active"]:text-emphasis focus-visible:outline-none',
+      'focus-visible:ring-1 focus-visible:ring-offset-2',
       className,
     )}
   />
 ));
 
 export const Content = forwardRef<ContentElement, ContentProps>(({ className, ...props }, ref) => (
-  <Radix.Content {...props} ref={ref} className={twMerge('px-5 py-3', className)} />
+  <Radix.Content
+    {...props}
+    ref={ref}
+    className={twMerge(
+      'rounded px-5 py-3 focus-visible:outline-none',
+      'focus-visible:ring-1 focus-visible:ring-offset-2',
+      className,
+    )}
+  />
 ));
 
 Root.displayName = Radix.Root.displayName;

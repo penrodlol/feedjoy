@@ -55,9 +55,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <nav>
                   {/* prettier-ignore */}
                   <ul className="flex gap-6">
-                  <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
-                  <li><NextAnchor href="/about">about</NextAnchor></li>
-                </ul>
+                    <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
+                    <li><NextAnchor href="/about">about</NextAnchor></li>
+                  </ul>
                 </nav>
               </div>
             </header>

@@ -11,7 +11,9 @@ export type NextAnchorElement = ComponentRef<typeof Link>;
 export type NextAnchorProps = ComponentPropsWithRef<typeof Link>;
 
 const baseClassName =
-  'inline-flex items-center gap-1 hover:text-emphasis motion-safe:transition-colors';
+  'inline-flex items-center gap-1 rounded motion-safe:transition-colors ' +
+  'hover:text-emphasis focus-visible:outline-none focus-visible:ring-1 ' +
+  'focus-visible:ring-offset-2';
 
 export const Anchor = forwardRef<AnchorElement, AnchorProps>(
   ({ className, children, target, rel, ...props }: AnchorProps, ref) => (
