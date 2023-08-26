@@ -40,8 +40,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       className={twJoin(
         inter.variable,
-        'ml-[calc(100vw-100%)] bg-1 bg-grid text-1 antialiased scrollbar-thin',
-        'scrollbar-thumb-scrollbar scrollbar-track-transparent scrollbar-thumb-rounded',
+        'ml-[calc(100vw-100%)] bg-1 bg-grid text-1 antialiased selection:bg-2',
+        'scrollbar-thumb-scrollbar scrollbar-thin scrollbar-track-transparent scrollbar-thumb-rounded',
       )}
     >
       <body className="m-4 text-base">
