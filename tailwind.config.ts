@@ -11,7 +11,7 @@ export default {
       fontSize: { xxs: '12px' },
       backgroundColor: { 1: colors.neutral[950], 2: colors.neutral[800] },
       textColor: { 1: colors.neutral[400], 2: colors.neutral[500] },
-      colors: { emphasis: colors.neutral[200] },
+      colors: { emphasis: colors.neutral[200], scrollbar: colors.neutral[800] },
       borderColor: { DEFAULT: colors.neutral[800] },
       ringColor: { DEFAULT: colors.neutral[800] },
       spacing: {
@@ -32,6 +32,7 @@ export default {
   future: { hoverOnlyWhenSupported: true },
   plugins: [
     require('tailwindcss-fluid-type'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
     plugin(({ addUtilities }) => {
       addUtilities({
         '.text-fancy': {

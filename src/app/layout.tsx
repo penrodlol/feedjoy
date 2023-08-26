@@ -36,8 +36,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={twJoin(inter.variable, 'ml-[calc(100vw-100%)] bg-1 bg-grid')}>
-      <body className="m-4 text-base text-1 antialiased">
+    <html
+      lang="en"
+      className={twJoin(
+        inter.variable,
+        'ml-[calc(100vw-100%)] bg-1 bg-grid text-1 antialiased scrollbar-thin',
+        'scrollbar-thumb-scrollbar scrollbar-track-transparent scrollbar-thumb-rounded',
+      )}
+    >
+      <body className="m-4 text-base">
         <div className="mx-auto max-w-screen-xl rounded bg-gradient p-px">
           <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black px-6 py-1">
             <header className="flex flex-col gap-3 p-3">

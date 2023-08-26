@@ -43,6 +43,7 @@
     "prettier-plugin-tailwindcss": "^0.5.3",
     "rss-parser": "^3.13.0",
     "tailwind-merge": "^1.14.0",
+    "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "3.3.3",
     "tailwindcss-fluid-type": "^2.0.3",
     "typescript": "5.1.6",
