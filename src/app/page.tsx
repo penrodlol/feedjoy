@@ -1,94 +1,126 @@
-import { datetimeFrmt, numberFrmt } from '@/const/formatters';
-import supabase from '@/lib/supabase';
+import { formatDate } from '@/lib/formatter';
+import supabase, { type Enums } from '@/lib/supabase';
 import { NextAnchor } from '@/ui/anchor';
-import Card from '@/ui/card';
+import Button from '@/ui/button';
+import * as Card from '@/ui/card';
+import Separator from '@/ui/separator';
 import * as Tabs from '@/ui/tabs';
-import { ArrowRight, User } from 'lucide-react';
+import { ActivityIcon, ArrowRightIcon, UserIcon } from 'lucide-react';
+import Link from 'next/link';
 
 export const revalidate = 28800;
 
 async function getData() {
-  const { data: root } = await supabase.rpc('get_summary');
-  const { data: recentPosts } = await supabase.rpc('get_recent_posts');
-  const { data: randomPosts } = await supabase.rpc('get_random_posts');
-  return { root, recentPosts, randomPosts };
+  const totals = await supabase.rpc('summary_totals_ordered').select('type, total, updated_at');
+  if (totals.error) return undefined;
+
+  const topics = await supabase.rpc('summary_topics_ordered').select('type, items');
+  if (topics.error) return undefined;
+
+  const recentPosts = await supabase
+    .from('post')
+    .select('slug, title, pub_date, site!inner(id, slug, name)')
+    .order('pub_date', { ascending: false })
+    .limit(8);
+  if (recentPosts.error) return undefined;
+
+  return { summary: { totals: totals.data, topics: topics.data }, recentPosts: recentPosts.data };
 }
 
 export default async function Home() {
-  const { root, randomPosts, recentPosts } = await getData();
+  const data = await getData();
 
   return (
-    <div className="mx-auto my-fluid-4 flex max-w-screen-md flex-col gap-fluid-5">
+    <div className="mx-auto mt-fluid-6 flex max-w-screen-lg flex-col gap-fluid-4">
       <section>
-        <h1 className="mb-4 font-fancy -tracking-[0.1em] text-7xl">feedjoy</h1>
-        <p className="mb-fluid-4 text-2 text-lg">
-          a minimal rss feed aggregator
+        <h1 className="text-8xl tracking-widest text-fancy">FEEDJOY</h1>
+        <h2 className="text-lg tracking-wider text-2">a minimal RSS feed aggregator</h2>
+        <p className="mb-8 mt-4 max-w-prose text-xs leading-8 text-2">
+          feedjoy aggregates blog posts from multiple RSS feeds into a single source. Its goal is to
+          provide a more efficient way of tracking new posts without needing to subscribe to
+          multiple newsletters.
         </p>
-        <ul className="flex max-w-max items-center gap-fluid-4 overflow-x-auto pb-1 text-base">
-          <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
-            <span className="text-2">total posts:</span>
-            <span>{numberFrmt.format(root?.totalposts ?? 0)}</span>
-          </li>
-          <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
-            <span className="text-2">total sites:</span>
-            <span>{numberFrmt.format(root?.totalsites ?? 0)}</span>
-          </li>
-          <li className="flex shrink-0 flex-col gap-x-3 sm:flex-row sm:items-center">
-            <span className="text-2">posts this week:</span>
-            <span>{numberFrmt.format(root?.postweek ?? 0)}</span>
-          </li>
-        </ul>
+        <Button asChild>
+          <Link href="/posts/page/1" className="text-sm">
+            explore posts <ArrowRightIcon size={14} aria-hidden />
+          </Link>
+        </Button>
       </section>
-      <section className="flex flex-col gap-2">
-        <Tabs.Root defaultValue="recent posts">
-          <Tabs.Triggers>
-            <Tabs.Trigger value="recent posts">recent posts</Tabs.Trigger>
-            <Tabs.Trigger value="discover">discover</Tabs.Trigger>
-          </Tabs.Triggers>
-          <Tabs.Content value="recent posts">
-            <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {recentPosts?.map((post) => (
-                <li key={post.slug}>
-                  <Card
-                    href={`/sites/${post.siteslug}/${post.slug}`}
-                    title={post.title}
-                  >
-                    <p className="flex items-center gap-2">
-                      <User className="h-4 w-4 shrink-0" aria-hidden />
-                      <span>{post.sitename}</span>
-                    </p>
-                    <time dateTime={new Date(post.pub_date).toISOString()}>
-                      {datetimeFrmt.format(new Date(post.pub_date))}
-                    </time>
-                  </Card>
-                </li>
+      <Separator />
+      <section className="grid gap-x-fluid-5 gap-y-10 md:grid-cols-2">
+        <div className="flex flex-col gap-4">
+          <h3 className="leading-none tracking-wider text-2">SUMMARY</h3>
+          <ul className="flex flex-col gap-4">
+            {data?.summary.totals.map(({ type, total, updated_at }) => (
+              <li key={type} className="rounded bg-gradient p-px">
+                <div className="flex flex-col rounded bg-black px-5 py-2.5">
+                  <div className="flex justify-between">
+                    <span className="mb-1 text-xs">{type}</span>
+                    <ActivityIcon size={16} className="text-2" aria-hidden />
+                  </div>
+                  <strong>{total}</strong>
+                  <em className="flex gap-1 text-xxs text-2">
+                    <span>last updated:</span>
+                    <time dateTime={updated_at}>{formatDate(updated_at)}</time>
+                  </em>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h3 className="leading-none tracking-wider text-2">POPULAR TOPICS</h3>
+          <Tabs.Root defaultValue={'all time' satisfies Enums<'summary_topic_type'>}>
+            <Tabs.List className="text-xs">
+              {data?.summary.topics.map(({ type }) => (
+                <Tabs.Trigger key={type} value={type}>
+                  {type}
+                </Tabs.Trigger>
               ))}
-            </ul>
-          </Tabs.Content>
-          <Tabs.Content value="discover">
-            <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {randomPosts?.map((post) => (
-                <li key={post.slug}>
-                  <Card
-                    href={`/sites/${post.siteslug}/${post.slug}`}
-                    title={post.title}
-                  >
-                    <p className="flex items-center gap-2">
-                      <User className="h-4 w-4 shrink-0" aria-hidden />
-                      <span>{post.sitename}</span>
-                    </p>
-                    <time dateTime={new Date(post.pub_date).toISOString()}>
-                      {datetimeFrmt.format(new Date(post.pub_date))}
-                    </time>
-                  </Card>
-                </li>
-              ))}
-            </ul>
-          </Tabs.Content>
-        </Tabs.Root>
-        <NextAnchor className="mt-4 self-end" href="/page/1">
-          read all posts
-          <ArrowRight className="h-5 w-5" aria-hidden />
+            </Tabs.List>
+            {data?.summary.topics.map(({ type, items }) => (
+              <Tabs.Content key={type} value={type}>
+                <ul className="flex flex-col gap-1 text-xs">
+                  {items.map(({ topic, total }, index) => (
+                    <li key={topic} className="flex flex-col gap-1">
+                      <div className="flex justify-between">
+                        <span>{topic}</span>
+                        <p className="flex items-center gap-1">
+                          <strong>{total}</strong>
+                          <span className="text-2">posts</span>
+                        </p>
+                      </div>
+                      {index !== 7 && <Separator />}
+                    </li>
+                  ))}
+                </ul>
+              </Tabs.Content>
+            ))}
+          </Tabs.Root>
+        </div>
+      </section>
+      <Separator />
+      <section className="flex flex-col gap-6">
+        <h3 className="text-lg tracking-wider text-2">RECENT POSTS</h3>
+        <ul className="grid gap-6 md:grid-cols-2">
+          {data?.recentPosts?.map((post) => (
+            <li key={post.slug}>
+              <Card.Root href={`/posts/${post.slug}`}>
+                <Card.Header>
+                  <p className="flex items-center gap-2">
+                    <UserIcon size={14} aria-hidden /> {post.site?.name}
+                  </p>
+                  <time dateTime={new Date(post.pub_date).toISOString()}>
+                    {formatDate(post.pub_date)}
+                  </time>
+                </Card.Header>
+                <Card.Body>{post.title}</Card.Body>
+              </Card.Root>
+            </li>
+          ))}
+        </ul>
+        <NextAnchor href="/posts/page/1" className="mt-4 self-end text-xs">
+          view all posts <ArrowRightIcon size={14} aria-hidden />
         </NextAnchor>
       </section>
     </div>

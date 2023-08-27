@@ -1,8 +1,8 @@
 import Parser from 'rss-parser';
-import type { Site } from '../../../src/lib/supabase';
+import type { Tables } from '../../../src/lib/supabase';
 import supabase from '../libs/supabase.mts';
 
-export default async function getPosts(sites: Array<Site>, min: Date) {
+export default async function getPosts(sites: Array<Tables<'site'>>, min: Date) {
   const parser = new Parser();
   const posts = await Promise.all(
     sites.map(async ({ id, url, name }) => {

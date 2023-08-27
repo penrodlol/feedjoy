@@ -1,24 +1,13 @@
 import { Anchor, NextAnchor } from '@/ui/anchor';
-import { Home } from 'lucide-react';
+import Separator from '@/ui/separator';
+import { GithubIcon, HomeIcon } from 'lucide-react';
 import type { Metadata } from 'next';
-import { Kaisei_Tokumin, Taviraj } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { twJoin } from 'tailwind-merge';
 import 'tailwindcss/tailwind.css';
-import Search from './search';
 
-const taviraj = Taviraj({
-  weight: ['400', '700'],
-  variable: '--font-taviraj',
-  display: 'swap',
-  subsets: ['latin'],
-});
-
-const kaisei = Kaisei_Tokumin({
-  weight: ['500'],
-  variable: '--font-kaisei',
-  display: 'swap',
-  subsets: ['latin'],
-});
+const inter = Inter({ weight: '400', variable: '--font', display: 'swap', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'feedjoy',
@@ -27,11 +16,7 @@ export const metadata: Metadata = {
   creator: 'christian penrod',
   publisher: 'christian penrod',
   keywords: 'rss, nextjs, openai, tailwindcss, supabase',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   openGraph: {
     title: 'feedjoy',
     description: 'a minimal rss feed aggregator',
@@ -53,37 +38,56 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`ml-[calc(100vw-100%)] ${taviraj.variable} ${kaisei.variable}`}
+      className={twJoin(
+        inter.variable,
+        'ml-[calc(100vw-100%)] bg-1 bg-grid text-1 antialiased selection:bg-2',
+        'scrollbar-thumb-scrollbar scrollbar-thin scrollbar-track-transparent scrollbar-thumb-rounded',
+      )}
     >
-      <body
-        className="!mx-auto flex min-h-screen max-w-screen-lg flex-col bg-1 px-fluid-4 
-                   text-1 text-sm selection:bg-brand selection:text-black"
-      >
-        <div className="mx-auto my-4 flex w-full items-center gap-fluid-2 rounded bg-2 px-4 py-2 shadow">
-          <NextAnchor href="/" className="mr-auto" aria-label="Home">
-            <Home className="h-5 w-5" aria-hidden />
-          </NextAnchor>
-          <nav>
-            {/* prettier-ignore */}
-            <ul className="flex gap-5">
-              <li><NextAnchor href="/page/1">posts</NextAnchor></li>
-              <li><NextAnchor href="/sites/page/1">sites</NextAnchor></li>
-              <li><NextAnchor href="/about">about</NextAnchor></li>
-            </ul>
-          </nav>
-          {/* @ts-expect-error Async Server Component */}
-          <Search />
+      <body className="m-4 text-base">
+        <div className="mx-auto max-w-screen-xl rounded bg-gradient p-px">
+          <div className="flex min-h-[calc(100vh-2.125rem)] flex-col rounded bg-black px-6 py-1">
+            <header className="flex flex-col gap-3 py-3 sm:px-3">
+              <div className="flex justify-between text-xs">
+                <NextAnchor href="/" aria-label="home" className="rounded border bg-1 p-1 text-2">
+                  <HomeIcon size={16} aria-hidden />
+                </NextAnchor>
+                <nav>
+                  {/* prettier-ignore */}
+                  <ul className="flex gap-6">
+                    <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
+                    <li><NextAnchor href="/about">about</NextAnchor></li>
+                  </ul>
+                </nav>
+              </div>
+            </header>
+            <main className="mb-fluid-6 flex-1">{children}</main>
+            <footer className="mx-auto w-full max-w-screen-lg">
+              <Separator />
+              <div className="flex flex-col-reverse gap-4 px-2 py-4 text-xxs text-2 sm:flex-row sm:items-center sm:justify-between">
+                <p>©{new Date().getFullYear()} Christian Penrod - All Rights Reserved</p>
+                <div className="flex items-center justify-between gap-5">
+                  <nav>
+                    {/* prettier-ignore */}
+                    <ul className="flex gap-3">
+                      <li><NextAnchor href="/">home</NextAnchor></li>
+                      <li><NextAnchor href="/posts/page/1">posts</NextAnchor></li>
+                      <li><NextAnchor href="/about">about</NextAnchor></li>
+                    </ul>
+                  </nav>
+                  <Separator orientation="vertical" className="hidden h-5 sm:block" />
+                  <Anchor
+                    href="https://github.com/penrodlol/feedjoy"
+                    aria-label="github"
+                    className="rounded border bg-1 p-1 [&_[data-external-icon]]:hidden"
+                  >
+                    <GithubIcon size={14} aria-hidden />
+                  </Anchor>
+                </div>
+              </div>
+            </footer>
+          </div>
         </div>
-        <main className="flex-1 pb-fluid-4 motion-safe:animate-fade-in">
-          {children}
-        </main>
-        <footer className="p-2 text-center text-2 text-xs">
-          <p>christian penrod ©{new Date().getUTCFullYear()}</p>
-          <p>
-            source code:{' '}
-            <Anchor href="https://github.com/penrodlol/feedjoy">github</Anchor>
-          </p>
-        </footer>
       </body>
     </html>
   );

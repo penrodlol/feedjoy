@@ -1,30 +1,59 @@
 'use client';
 
 import * as Radix from '@radix-ui/react-tabs';
+import { forwardRef, type ComponentPropsWithRef, type ComponentRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-export const Root = Radix.Root;
-export const Content = Radix.TabsContent;
+export type RootElement = ComponentRef<typeof Radix.Root>;
+export type RootProps = ComponentPropsWithRef<typeof Radix.Root>;
+export type ListElement = ComponentRef<typeof Radix.List>;
+export type ListProps = ComponentPropsWithRef<typeof Radix.List>;
+export type TriggerElement = ComponentRef<typeof Radix.Trigger>;
+export type TriggerProps = ComponentPropsWithRef<typeof Radix.Trigger>;
+export type ContentElement = ComponentRef<typeof Radix.Content>;
+export type ContentProps = ComponentPropsWithRef<typeof Radix.Content>;
 
-export function Triggers({ children, ...props }: Radix.TabsListProps) {
-  return (
-    <div className="mb-8">
-      <Radix.TabsList {...props} className="flex justify-between gap-1">
-        {children}
-      </Radix.TabsList>
-      <div className="h-0.5 w-full rounded bg-3" />
-    </div>
-  );
-}
+export const Root = forwardRef<RootElement, RootProps>(({ className, children, ...props }, ref) => (
+  <Radix.Root {...props} ref={ref} className={twMerge('rounded bg-gradient p-px', className)}>
+    <div className="rounded bg-black">{children}</div>
+  </Radix.Root>
+));
 
-export function Trigger({ children, ...props }: Radix.TabsTriggerProps) {
-  return (
-    <Radix.TabsTrigger
-      {...props}
-      className="flex-1 select-none rounded p-1 text-2 transition-colors
-                 hover:bg-2 hover:text-1 data-[state='active']:bg-2 
-                 data-[state='active']:text-1"
-    >
-      {children}
-    </Radix.TabsTrigger>
-  );
-}
+export const List = forwardRef<ListElement, ListProps>(({ className, ...props }, ref) => (
+  <Radix.List
+    {...props}
+    ref={ref}
+    className={twMerge('flex justify-between rounded-t border-b p-1.5', className)}
+  />
+));
+
+export const Trigger = forwardRef<TriggerElement, TriggerProps>(({ className, ...props }, ref) => (
+  <Radix.Trigger
+    {...props}
+    ref={ref}
+    className={twMerge(
+      'flex-1 select-none rounded border p-0.5 transition-colors hover:text-emphasis',
+      'data-[state="inactive"]:border-transparent data-[state="active"]:bg-1',
+      'data-[state="active"]:text-emphasis focus-visible:outline-none',
+      'focus-visible:ring-1 focus-visible:ring-offset-2',
+      className,
+    )}
+  />
+));
+
+export const Content = forwardRef<ContentElement, ContentProps>(({ className, ...props }, ref) => (
+  <Radix.Content
+    {...props}
+    ref={ref}
+    className={twMerge(
+      'rounded px-5 py-3 focus-visible:outline-none',
+      'focus-visible:ring-1 focus-visible:ring-offset-2',
+      className,
+    )}
+  />
+));
+
+Root.displayName = Radix.Root.displayName;
+List.displayName = Radix.List.displayName;
+Trigger.displayName = Radix.Trigger.displayName;
+Content.displayName = Radix.Content.displayName;

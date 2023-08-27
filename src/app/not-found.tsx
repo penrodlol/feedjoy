@@ -1,14 +1,17 @@
 import { NextAnchor } from '@/ui/anchor';
-import { ArrowLeft } from 'lucide-react';
+import Button from '@/ui/button';
+import { ArrowLeftIcon } from 'lucide-react';
 
-export default function NotFound() {
+export default function Page() {
   return (
-    <div className="mt-fluid-6 flex flex-col items-center gap-2 text-center">
-      <h1 className="font-fancy -tracking-[0.1em] text-9xl">404</h1>
-      <p className="text-2 text-2xl">page not found</p>
-      <NextAnchor href="/" className="mt-fluid-4">
-        <ArrowLeft aria-hidden /> go to home
-      </NextAnchor>
+    <div className="mt-fluid-6 text-center">
+      <h1 className="text-9xl tracking-widest text-fancy">404</h1>
+      <p className="text-xl text-2">page not found</p>
+      <Button asChild>
+        <NextAnchor href="/" className="mt-fluid-4 gap-3 text-xs">
+          <ArrowLeftIcon size={16} aria-hidden /> go back home
+        </NextAnchor>
+      </Button>
     </div>
   );
 }
