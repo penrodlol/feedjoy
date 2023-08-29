@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: pnpm install
+        run: yarn install
 
       - name: Fetch Posts
         run: npx ts-node .github/scripts/daily.mts
