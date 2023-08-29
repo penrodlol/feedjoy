@@ -22,7 +22,7 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Fetch Posts/Summaries/Topics
         run: npx ts-node .github/scripts/add.mts
