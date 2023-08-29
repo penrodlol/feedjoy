@@ -19,12 +19,12 @@ export default async function getTopics(summaries: GetSummaries) {
       const content =
         'Give me a technical tool from this text (Only return the name of the tool. ' +
         `Exclude version numbers.):\n\n${payload.summary}`;
-      const topicPayload = await openai.createChatCompletion({
+      const topicPayload = await openai.chat.completions.create({
         model: 'gpt-4',
         messages: [{ role: 'user', content }],
       });
 
-      const _topic = topicPayload.data.choices[0]?.message?.content.trim();
+      const _topic = topicPayload.choices[0]?.message?.content?.trim();
       if (!_topic?.length) return;
 
       const postWithTopic = await supabase

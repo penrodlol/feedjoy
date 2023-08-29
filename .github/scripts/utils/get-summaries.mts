@@ -23,12 +23,12 @@ export default async function getSummaries() {
       const text = decode(encode(root.text()).slice(0, 8000));
 
       const content = `Summarize in 1 paragraph: ${text}`;
-      const payload = await openai.createChatCompletion({
+      const payload = await openai.chat.completions.create({
         model: 'gpt-4',
         messages: [{ role: 'user', content }],
       });
 
-      const summary = payload.data.choices?.[0]?.message?.content;
+      const summary = payload.choices?.[0]?.message?.content;
       return summary != null ? { id, summary } : null;
     }),
   );
