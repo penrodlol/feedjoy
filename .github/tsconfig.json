@@ -5,9 +5,6 @@
     "module": "esnext",
     "allowImportingTsExtensions": true
   },
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  },
+  "ts-node": { "esm": true },
   "include": ["scripts/**/*.mts"]
 }
